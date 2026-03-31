@@ -1,119 +1,1160 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muttahir Islam | Full Stack Developer</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
-        .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); }
-    </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Muttahir Islam | Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#000000;
+  --bg2:#0d0d0d;
+  --bg3:#111111;
+  --bg4:#1a1a1a;
+  --bg5:#222222;
+  --sidebar:#0a0a0a;
+  --sidebar-hover:#1e1e1e;
+  --tab-bar:#0d0d0d;
+  --tab-active:#111111;
+  --tab-inactive:#0a0a0a;
+  --border:#2a2a2a;
+  --border2:#1e1e1e;
+  --text:#e8e8e8;
+  --text2:#a0a0a0;
+  --text3:#666666;
+  --text4:#444444;
+  --accent:#fe8019;
+  --accent2:#d65d0e;
+  --blue:#458588;
+  --blue2:#83a598;
+  --green:#98971a;
+  --green2:#b8bb26;
+  --purple:#b16286;
+  --purple2:#d3869b;
+  --yellow:#d79921;
+  --yellow2:#fabd2f;
+  --red:#cc241d;
+  --red2:#fb4934;
+  --cyan:#689d6a;
+  --cyan2:#8ec07c;
+  --intellij-blue:#4e9cf5;
+  --line-num:#3a3a3a;
+  --selection:#264f78;
+  --font-mono:'JetBrains Mono',monospace;
+  --font-ui:'Inter',sans-serif;
+}
+
+html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:var(--font-mono);}
+
+/* ===== TOP TITLE BAR ===== */
+.title-bar{
+  height:38px;
+  background:#000;
+  border-bottom:1px solid var(--border2);
+  display:flex;
+  align-items:center;
+  padding:0 12px;
+  gap:8px;
+  -webkit-app-region:drag;
+  position:relative;
+  z-index:100;
+}
+.title-bar-left{display:flex;align-items:center;gap:10px;flex:1;}
+.intellij-logo{
+  width:20px;height:20px;
+  background:linear-gradient(135deg,#fe8019,#d65d0e);
+  border-radius:4px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;font-weight:900;color:#000;
+  font-family:var(--font-ui);
+}
+.title-bar-menu{display:flex;gap:2px;}
+.title-bar-menu span{
+  font-size:11px;color:var(--text2);padding:2px 8px;border-radius:3px;cursor:pointer;
+  font-family:var(--font-ui);
+}
+.title-bar-menu span:hover{background:var(--bg4);}
+.title-bar-center{
+  position:absolute;left:50%;transform:translateX(-50%);
+  display:flex;align-items:center;gap:8px;
+}
+.project-name{
+  font-size:12px;color:var(--text2);font-family:var(--font-ui);
+  display:flex;align-items:center;gap:6px;
+}
+.branch-pill{
+  background:var(--bg4);border:1px solid var(--border);border-radius:12px;
+  padding:2px 8px;font-size:10px;color:var(--accent);
+  display:flex;align-items:center;gap:4px;
+}
+.title-bar-right{display:flex;align-items:center;gap:8px;margin-left:auto;}
+.tb-icon{
+  width:26px;height:26px;border-radius:4px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:13px;color:var(--text2);
+  transition:background 0.15s;
+}
+.tb-icon:hover{background:var(--bg4);}
+.tb-icon.run{color:#b8bb26;}
+.tb-icon.debug{color:#83a598;}
+.win-controls{display:flex;gap:6px;margin-left:8px;}
+.win-btn{width:12px;height:12px;border-radius:50%;cursor:pointer;}
+.win-btn.close{background:#ff5f57;}
+.win-btn.min{background:#febc2e;}
+.win-btn.max{background:#28c840;}
+
+/* ===== MAIN LAYOUT ===== */
+.app{display:flex;height:calc(100vh - 38px);}
+
+/* ===== LEFT ICON RAIL ===== */
+.icon-rail{
+  width:42px;
+  background:#000;
+  border-right:1px solid var(--border2);
+  display:flex;flex-direction:column;align-items:center;
+  padding:8px 0;
+  gap:2px;
+  z-index:10;
+}
+.rail-icon{
+  width:32px;height:32px;border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:16px;color:var(--text3);
+  transition:all 0.15s;position:relative;
+}
+.rail-icon:hover,.rail-icon.active{color:var(--text);background:var(--bg4);}
+.rail-icon.active{color:var(--accent);}
+.rail-bottom{margin-top:auto;}
+
+/* ===== SIDEBAR ===== */
+.sidebar{
+  width:240px;
+  background:var(--sidebar);
+  border-right:1px solid var(--border2);
+  display:flex;flex-direction:column;
+  overflow:hidden;
+  transition:width 0.2s;
+}
+.sidebar-header{
+  padding:8px 12px;
+  border-bottom:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.sidebar-title{
+  font-size:11px;font-weight:600;color:var(--text2);
+  text-transform:uppercase;letter-spacing:0.08em;
+  font-family:var(--font-ui);
+}
+.sidebar-actions{display:flex;gap:2px;}
+.sidebar-action{
+  width:20px;height:20px;border-radius:3px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:11px;color:var(--text3);
+}
+.sidebar-action:hover{background:var(--bg4);color:var(--text);}
+.file-tree{flex:1;overflow-y:auto;padding:4px 0;}
+.file-tree::-webkit-scrollbar{width:4px;}
+.file-tree::-webkit-scrollbar-track{background:transparent;}
+.file-tree::-webkit-scrollbar-thumb{background:var(--border);}
+.tree-item{
+  display:flex;align-items:center;gap:5px;
+  padding:3px 8px 3px 0;
+  cursor:pointer;font-size:12px;color:var(--text2);
+  border-radius:3px;margin:0 4px;
+  transition:background 0.1s;
+  white-space:nowrap;
+}
+.tree-item:hover{background:var(--sidebar-hover);}
+.tree-item.active{background:#1a2433;color:var(--intellij-blue);}
+.tree-item.folder{color:var(--yellow2);}
+.tree-indent{width:16px;flex-shrink:0;}
+.tree-arrow{width:12px;height:12px;display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--text3);}
+.file-icon{width:16px;height:16px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;}
+.file-name{font-size:12px;font-family:var(--font-ui);}
+
+/* file type colors */
+.icon-java{color:#b07219;}
+.icon-xml{color:#e37933;}
+.icon-yaml{color:#e37933;}
+.icon-md{color:#519aba;}
+.icon-js{color:#f1e05a;}
+.icon-vue{color:#41b883;}
+.icon-folder{color:#c09553;}
+.icon-kt{color:#a97bff;}
+
+/* ===== EDITOR AREA ===== */
+.editor-area{flex:1;display:flex;flex-direction:column;overflow:hidden;background:var(--bg3);}
+
+/* ===== TAB BAR ===== */
+.tab-bar{
+  height:36px;
+  background:var(--tab-bar);
+  border-bottom:1px solid var(--border2);
+  display:flex;
+  align-items:flex-end;
+  overflow-x:auto;
+  padding:0 4px;
+  gap:1px;
+  flex-shrink:0;
+}
+.tab-bar::-webkit-scrollbar{height:0;}
+.tab{
+  height:32px;
+  padding:0 12px;
+  display:flex;align-items:center;gap:6px;
+  cursor:pointer;
+  border-radius:6px 6px 0 0;
+  font-size:12px;color:var(--text3);
+  background:var(--tab-inactive);
+  border:1px solid transparent;
+  border-bottom:none;
+  transition:all 0.15s;
+  white-space:nowrap;
+  flex-shrink:0;
+  font-family:var(--font-ui);
+}
+.tab:hover{background:var(--bg4);color:var(--text2);}
+.tab.active{
+  background:var(--bg3);
+  color:var(--text);
+  border-color:var(--border2);
+  border-bottom:2px solid var(--accent);
+}
+.tab-dot{width:6px;height:6px;border-radius:50%;}
+
+/* ===== EDITOR CONTENT ===== */
+.editor-content{
+  flex:1;
+  overflow-y:auto;
+  display:flex;
+  background:var(--bg3);
+}
+.editor-content::-webkit-scrollbar{width:6px;}
+.editor-content::-webkit-scrollbar-track{background:transparent;}
+.editor-content::-webkit-scrollbar-thumb{background:var(--border);}
+.line-numbers{
+  width:48px;flex-shrink:0;
+  padding:20px 0;
+  text-align:right;
+  background:var(--bg3);
+  border-right:1px solid var(--border2);
+  user-select:none;
+}
+.line-num{
+  height:22px;
+  padding-right:12px;
+  font-size:12px;color:var(--line-num);
+  line-height:22px;
+  font-family:var(--font-mono);
+}
+.line-num.active{color:var(--text2);}
+.code-area{
+  flex:1;
+  padding:20px 0 20px 16px;
+  font-size:13px;
+  line-height:22px;
+  overflow:visible;
+}
+.code-line{
+  min-height:22px;
+  display:flex;
+  align-items:flex-start;
+  flex-wrap:wrap;
+}
+
+/* ===== PAGE SECTIONS ===== */
+.page{display:none;}
+.page.active{display:block;animation:fadeIn 0.2s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+
+/* Syntax colors */
+.kw{color:#cc7832;font-style:normal;}          /* keyword orange */
+.kw2{color:#cf8e6d;}                            /* keyword2 */
+.str{color:#6aab73;}                            /* string green */
+.str2{color:#a9c97b;}
+.num{color:#2aacb8;}                            /* number cyan */
+.cmt{color:#7a7e85;font-style:italic;}          /* comment */
+.fn{color:#56a8f5;}                             /* function blue */
+.cls{color:#ffc66d;}                            /* class yellow */
+.var{color:#e8e8e8;}
+.punct{color:#cc7832;}
+.prop{color:#9876aa;}                           /* property purple */
+.ann{color:#bbb529;}                            /* annotation */
+.tag{color:#e8bf6a;}
+.attr{color:#bababa;}
+.val{color:#6aab73;}
+.hl{color:var(--accent);font-weight:600;}       /* highlight */
+.dim{color:var(--text3);}
+.link-text{color:#4e9cf5;text-decoration:underline;cursor:pointer;}
+
+/* ===== HOME PAGE ===== */
+.hero-split{
+  display:flex;
+  min-height:calc(100vh - 130px);
+}
+.hero-code{flex:1;padding:0;}
+.hero-right{
+  width:380px;flex-shrink:0;
+  background:#000;
+  border-left:1px solid var(--border2);
+  display:flex;flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:40px 32px;
+  gap:20px;
+}
+.profile-photo{
+  width:110px;height:110px;
+  border-radius:50%;
+  border:2px solid var(--accent);
+  object-fit:cover;
+  box-shadow:0 0 30px rgba(254,128,25,0.2);
+}
+.hero-name{
+  font-size:28px;font-weight:700;
+  color:var(--text);
+  text-align:center;
+  line-height:1.2;
+  font-family:var(--font-ui);
+}
+.hero-name span{color:var(--accent);}
+.hero-role{
+  font-size:13px;color:var(--text2);
+  text-align:center;
+  font-family:var(--font-ui);
+  letter-spacing:0.05em;
+}
+.hero-bio{
+  font-size:12px;color:var(--text2);
+  text-align:center;
+  line-height:1.7;
+  font-family:var(--font-ui);
+  max-width:300px;
+}
+.hero-btns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
+.btn{
+  padding:8px 18px;
+  border-radius:5px;
+  font-size:12px;font-weight:600;
+  cursor:pointer;border:none;
+  font-family:var(--font-ui);
+  transition:all 0.2s;
+  text-decoration:none;
+  display:inline-flex;align-items:center;gap:6px;
+}
+.btn-primary{background:var(--accent);color:#000;}
+.btn-primary:hover{background:var(--accent2);transform:translateY(-1px);}
+.btn-ghost{background:transparent;color:var(--text2);border:1px solid var(--border);}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent);}
+
+/* ===== ABOUT PAGE ===== */
+.about-layout{display:flex;gap:0;}
+.about-code{flex:1;}
+.about-right{
+  width:340px;flex-shrink:0;
+  background:#000;
+  border-left:1px solid var(--border2);
+  padding:24px 20px;
+  overflow-y:auto;
+}
+.about-right::-webkit-scrollbar{width:4px;}
+.about-right::-webkit-scrollbar-thumb{background:var(--border);}
+.section-label{
+  font-size:10px;font-weight:700;
+  text-transform:uppercase;letter-spacing:0.12em;
+  color:var(--text3);
+  font-family:var(--font-ui);
+  margin-bottom:12px;
+  padding-bottom:6px;
+  border-bottom:1px solid var(--border2);
+}
+.skill-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px;}
+.skill-card{
+  background:var(--bg4);
+  border:1px solid var(--border2);
+  border-radius:6px;
+  padding:10px 6px;
+  display:flex;flex-direction:column;align-items:center;gap:5px;
+  transition:all 0.15s;cursor:default;
+}
+.skill-card:hover{border-color:var(--accent);transform:translateY(-2px);}
+.skill-icon{font-size:22px;line-height:1;}
+.skill-name{font-size:9px;color:var(--text2);text-align:center;font-family:var(--font-ui);font-weight:500;}
+
+/* ===== PROJECTS PAGE ===== */
+.proj-layout{display:flex;gap:0;}
+.proj-code{flex:1;}
+.proj-right{
+  width:360px;flex-shrink:0;
+  background:#000;
+  border-left:1px solid var(--border2);
+  padding:20px;
+  overflow-y:auto;
+}
+.proj-right::-webkit-scrollbar{width:4px;}
+.proj-right::-webkit-scrollbar-thumb{background:var(--border);}
+.proj-card{
+  background:var(--bg4);
+  border:1px solid var(--border2);
+  border-radius:8px;
+  padding:16px;
+  margin-bottom:14px;
+  transition:all 0.2s;
+  cursor:pointer;
+}
+.proj-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 4px 20px rgba(254,128,25,0.1);}
+.proj-header{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.proj-logo{
+  width:36px;height:36px;border-radius:8px;
+  object-fit:contain;
+  background:var(--bg5);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;
+  border:1px solid var(--border);
+}
+.proj-logo img{width:100%;height:100%;object-fit:contain;border-radius:8px;}
+.proj-name{font-size:13px;font-weight:700;color:var(--accent);font-family:var(--font-ui);}
+.proj-period{font-size:10px;color:var(--text3);font-family:var(--font-ui);}
+.proj-desc{font-size:11px;color:var(--text2);line-height:1.6;font-family:var(--font-ui);margin-bottom:10px;}
+.proj-tags{display:flex;flex-wrap:wrap;gap:5px;}
+.proj-tag{
+  font-size:9px;padding:2px 7px;border-radius:10px;
+  background:var(--bg5);color:var(--text3);
+  border:1px solid var(--border2);
+  font-family:var(--font-ui);
+}
+
+/* ===== EXPERIENCE PAGE ===== */
+.exp-layout{display:flex;}
+.exp-code{flex:1;}
+.exp-right{
+  width:360px;flex-shrink:0;
+  background:#000;
+  border-left:1px solid var(--border2);
+  padding:20px;
+  overflow-y:auto;
+}
+.exp-right::-webkit-scrollbar{width:4px;}
+.exp-right::-webkit-scrollbar-thumb{background:var(--border);}
+.exp-card{
+  border-left:2px solid var(--border);
+  padding-left:16px;
+  margin-bottom:24px;
+  position:relative;
+}
+.exp-card::before{
+  content:'';
+  width:8px;height:8px;
+  background:var(--accent);
+  border-radius:50%;
+  position:absolute;
+  left:-5px;top:4px;
+}
+.exp-card.current::before{
+  background:var(--green2);
+  box-shadow:0 0 8px rgba(184,187,38,0.5);
+}
+.exp-company{font-size:14px;font-weight:700;color:var(--accent);font-family:var(--font-ui);}
+.exp-role{font-size:11px;color:var(--text2);font-family:var(--font-ui);margin:2px 0;}
+.exp-meta{font-size:10px;color:var(--text3);font-family:var(--font-ui);margin-bottom:8px;}
+.exp-bullet{
+  font-size:11px;color:var(--text2);
+  line-height:1.6;
+  font-family:var(--font-ui);
+  margin-bottom:6px;
+  padding-left:12px;
+  position:relative;
+}
+.exp-bullet::before{content:'•';position:absolute;left:0;color:var(--accent);}
+.exp-hl{color:var(--accent);font-weight:600;}
+
+/* ===== CONTACT PAGE ===== */
+.contact-layout{
+  display:flex;align-items:center;justify-content:center;
+  min-height:calc(100vh - 140px);
+  padding:40px;
+}
+.contact-box{
+  background:#000;
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:32px;
+  min-width:500px;
+  max-width:600px;
+}
+.contact-title{
+  font-size:20px;font-weight:700;
+  color:var(--accent);
+  font-family:var(--font-ui);
+  margin-bottom:6px;
+}
+.contact-sub{
+  font-size:12px;color:var(--text2);
+  font-family:var(--font-ui);
+  margin-bottom:24px;
+  line-height:1.6;
+}
+.contact-code{
+  background:var(--bg4);
+  border:1px solid var(--border2);
+  border-radius:6px;
+  padding:20px;
+}
+.contact-line{
+  display:flex;align-items:center;gap:0;
+  height:24px;font-size:13px;
+}
+.contact-prop{color:var(--prop);}
+.contact-colon{color:var(--text2);margin:0 4px;}
+.contact-val{color:var(--str);}
+.contact-val a{color:var(--str);text-decoration:none;}
+.contact-val a:hover{color:var(--accent);text-decoration:underline;}
+
+/* ===== STATUS BAR ===== */
+.status-bar{
+  height:24px;
+  background:#000;
+  border-top:1px solid var(--border2);
+  display:flex;align-items:center;
+  padding:0 8px;
+  gap:12px;
+  font-size:11px;color:var(--text3);
+  font-family:var(--font-ui);
+  flex-shrink:0;
+}
+.status-item{display:flex;align-items:center;gap:4px;}
+.status-branch{color:var(--accent);}
+.status-right{margin-left:auto;display:flex;gap:12px;}
+.status-ok{color:var(--green2);}
+
+/* ===== BREADCRUMB ===== */
+.breadcrumb{
+  height:26px;
+  background:var(--bg3);
+  border-bottom:1px solid var(--border2);
+  display:flex;align-items:center;
+  padding:0 16px;
+  gap:4px;
+  font-size:11px;color:var(--text3);
+  font-family:var(--font-ui);
+  flex-shrink:0;
+}
+.breadcrumb span{color:var(--text2);}
+.breadcrumb .sep{color:var(--text4);}
+
+/* scrollbars */
+.editor-content::-webkit-scrollbar{width:8px;}
+.editor-content::-webkit-scrollbar-track{background:var(--bg3);}
+.editor-content::-webkit-scrollbar-thumb{background:#333;border-radius:4px;}
+
+/* gutter */
+.gutter{
+  width:4px;background:var(--border2);
+  cursor:col-resize;
+}
+</style>
 </head>
-<body class="bg-slate-50 text-slate-900">
+<body>
 
-    <nav class="fixed w-full z-50 glass border-b border-slate-200">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <span class="text-xl font-bold tracking-tighter text-blue-600">MUTTAHIR<span class="text-slate-800">.DEV</span></span>
-            <div class="hidden md:flex space-x-8 font-medium text-sm uppercase tracking-widest">
-                <a href="#about" class="hover:text-blue-600 transition">About</a>
-                <a href="#tech" class="hover:text-blue-600 transition">Tech</a>
-                <a href="#projects" class="hover:text-blue-600 transition">Projects</a>
-                <a href="mailto:hello@muttahirislam.dev" class="text-blue-600 border border-blue-600 px-4 py-1 rounded-full hover:bg-blue-600 hover:text-white transition">Hire Me</a>
+<!-- TITLE BAR -->
+<div class="title-bar">
+  <div class="title-bar-left">
+    <div class="intellij-logo">IJ</div>
+    <div class="title-bar-menu">
+      <span>File</span><span>Edit</span><span>View</span><span>Navigate</span><span>Code</span><span>Run</span><span>Tools</span><span>Help</span>
+    </div>
+  </div>
+  <div class="title-bar-center">
+    <div class="project-name">
+      <span>portfolio</span>
+      <div class="branch-pill">⎇ main</div>
+    </div>
+  </div>
+  <div class="title-bar-right">
+    <div class="tb-icon">🔍</div>
+    <div class="tb-icon run">▶</div>
+    <div class="tb-icon debug">🐛</div>
+    <div class="tb-icon">⚙</div>
+    <div class="win-controls">
+      <div class="win-btn close"></div>
+      <div class="win-btn min"></div>
+      <div class="win-btn max"></div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div class="app">
+
+  <!-- ICON RAIL -->
+  <div class="icon-rail">
+    <div class="rail-icon active" title="Project">📁</div>
+    <div class="rail-icon" title="Commit">🔀</div>
+    <div class="rail-icon" title="Structure">🏗</div>
+    <div class="rail-icon" title="Bookmarks">🔖</div>
+    <div class="rail-icon" title="Problems">⚠</div>
+    <div class="rail-icon rail-bottom" title="Terminal">💻</div>
+    <div class="rail-icon" title="Run">▶</div>
+    <div class="rail-icon" title="Git">🌿</div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <span class="sidebar-title">Project</span>
+      <div class="sidebar-actions">
+        <div class="sidebar-action">⚙</div>
+        <div class="sidebar-action">−</div>
+      </div>
+    </div>
+    <div class="file-tree">
+      <!-- Root -->
+      <div class="tree-item folder" style="padding-left:8px;">
+        <div class="tree-arrow">▾</div>
+        <div class="file-icon icon-folder">📂</div>
+        <span class="file-name" style="color:var(--yellow2);font-weight:600;">portfolio</span>
+      </div>
+      <!-- src -->
+      <div class="tree-item folder" style="padding-left:20px;">
+        <div class="tree-arrow">▾</div>
+        <div class="file-icon icon-folder">📂</div>
+        <span class="file-name">src</span>
+      </div>
+      <!-- files -->
+      <div class="tree-item active" style="padding-left:36px;" onclick="switchTab('home')">
+        <div class="tree-arrow"></div>
+        <div class="file-icon icon-java">☕</div>
+        <span class="file-name">Home.java</span>
+      </div>
+      <div class="tree-item" style="padding-left:36px;" onclick="switchTab('about')">
+        <div class="tree-arrow"></div>
+        <div class="file-icon icon-java">☕</div>
+        <span class="file-name">About.java</span>
+      </div>
+      <div class="tree-item" style="padding-left:36px;" onclick="switchTab('projects')">
+        <div class="tree-arrow"></div>
+        <div class="file-icon icon-xml">🔶</div>
+        <span class="file-name">Projects.xml</span>
+      </div>
+      <div class="tree-item" style="padding-left:36px;" onclick="switchTab('experience')">
+        <div class="tree-arrow"></div>
+        <div class="file-icon icon-kt">🟣</div>
+        <span class="file-name">Experience.kt</span>
+      </div>
+      <div class="tree-item" style="padding-left:36px;" onclick="switchTab('contact')">
+        <div class="tree-arrow"></div>
+        <div class="file-icon icon-yaml">🔸</div>
+        <span class="file-name">contact.yaml</span>
+      </div>
+      <!-- config -->
+      <div class="tree-item folder" style="padding-left:20px;">
+        <div class="tree-arrow">▾</div>
+        <div class="file-icon icon-folder">📂</div>
+        <span class="file-name">resources</span>
+      </div>
+      <div class="tree-item" style="padding-left:36px;">
+        <div class="tree-arrow"></div>
+        <div class="file-icon icon-yaml">🔸</div>
+        <span class="file-name">application.yaml</span>
+      </div>
+      <div class="tree-item" style="padding-left:20px;">
+        <div class="tree-arrow"></div>
+        <div class="file-icon icon-xml">🔶</div>
+        <span class="file-name">pom.xml</span>
+      </div>
+      <div class="tree-item" style="padding-left:20px;">
+        <div class="tree-arrow"></div>
+        <div class="file-icon icon-md">📘</div>
+        <span class="file-name">README.md</span>
+      </div>
+      <!-- External Libraries -->
+      <div class="tree-item folder" style="padding-left:8px;margin-top:4px;">
+        <div class="tree-arrow">▸</div>
+        <div class="file-icon">📚</div>
+        <span class="file-name" style="color:var(--text3);">External Libraries</span>
+      </div>
+      <div class="tree-item folder" style="padding-left:8px;">
+        <div class="tree-arrow">▸</div>
+        <div class="file-icon">🗒</div>
+        <span class="file-name" style="color:var(--text3);">Scratches and Consoles</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDITOR AREA -->
+  <div class="editor-area">
+
+    <!-- TAB BAR -->
+    <div class="tab-bar" id="tabBar">
+      <div class="tab active" id="tab-home" onclick="switchTab('home')">
+        <span style="color:#b07219;">☕</span>
+        <span>Home.java</span>
+      </div>
+      <div class="tab" id="tab-about" onclick="switchTab('about')">
+        <span style="color:#b07219;">☕</span>
+        <span>About.java</span>
+      </div>
+      <div class="tab" id="tab-projects" onclick="switchTab('projects')">
+        <span style="color:#e37933;">🔶</span>
+        <span>Projects.xml</span>
+      </div>
+      <div class="tab" id="tab-experience" onclick="switchTab('experience')">
+        <span style="color:#a97bff;">🟣</span>
+        <span>Experience.kt</span>
+      </div>
+      <div class="tab" id="tab-contact" onclick="switchTab('contact')">
+        <span style="color:#e37933;">🔸</span>
+        <span>contact.yaml</span>
+      </div>
+    </div>
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb" id="breadcrumb">
+      <span>portfolio</span><span class="sep"> › </span>
+      <span>src</span><span class="sep"> › </span>
+      <span>Home.java</span><span class="sep"> › </span>
+      <span>MuttahirIslam</span>
+    </div>
+
+    <!-- EDITOR CONTENT -->
+    <div class="editor-content">
+
+      <!-- LINE NUMBERS -->
+      <div class="line-numbers" id="lineNums"></div>
+
+      <!-- CODE AREA -->
+      <div class="code-area">
+
+        <!-- ===== HOME PAGE ===== -->
+        <div class="page active" id="page-home">
+          <div class="hero-split">
+            <div class="hero-code">
+<div class="code-line"><span class="ann">@SpringBootApplication</span></div>
+<div class="code-line"><span class="kw">public class </span><span class="cls">MuttahirIslam</span><span class="punct"> {</span></div>
+<div class="code-line">&nbsp;</div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="ann">@Value</span><span class="punct">(</span><span class="str">"name"</span><span class="punct">)</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">private </span><span class="cls">String </span><span class="var">name</span><span class="punct"> = </span><span class="str">"Muttahir Islam"</span><span class="punct">;</span></div>
+<div class="code-line">&nbsp;</div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="ann">@Value</span><span class="punct">(</span><span class="str">"role"</span><span class="punct">)</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">private </span><span class="cls">String </span><span class="var">role</span><span class="punct"> = </span><span class="str">"Software Engineer"</span><span class="punct">;</span></div>
+<div class="code-line">&nbsp;</div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="ann">@Value</span><span class="punct">(</span><span class="str">"specialization"</span><span class="punct">)</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">private </span><span class="cls">List</span><span class="punct">&lt;</span><span class="cls">String</span><span class="punct">&gt; </span><span class="var">stack</span><span class="punct"> = </span><span class="cls">List</span><span class="punct">.</span><span class="fn">of</span><span class="punct">(</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"Spring Boot"</span><span class="punct">, </span><span class="str">"Java"</span><span class="punct">, </span><span class="str">"Vue.js"</span><span class="punct">,</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"Quasar"</span><span class="punct">, </span><span class="str">"React"</span><span class="punct">, </span><span class="str">"AI Integrations"</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="punct">);</span></div>
+<div class="code-line">&nbsp;</div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="ann">@Bean</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">public </span><span class="cls">String </span><span class="fn">bio</span><span class="punct">() {</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return </span><span class="str">"Building enterprise-grade cloud-friendly"</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="punct">+ </span><span class="str">"software with 20+ production-ready features"</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="punct">+ </span><span class="str">"in compliance with security &amp; privacy standards."</span><span class="punct">;</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="punct">}</span></div>
+<div class="code-line">&nbsp;</div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">public static void </span><span class="fn">main</span><span class="punct">(</span><span class="cls">String</span><span class="punct">[] </span><span class="var">args</span><span class="punct">) {</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cls">SpringApplication</span><span class="punct">.</span><span class="fn">run</span><span class="punct">(</span><span class="cls">MuttahirIslam</span><span class="punct">.</span><span class="kw">class</span><span class="punct">, </span><span class="var">args</span><span class="punct">);</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="punct">}</span></div>
+<div class="code-line"><span class="punct">}</span></div>
+<div class="code-line">&nbsp;</div>
+<div class="code-line"><span class="cmt">// 🚀 Server started on port 8080</span></div>
+<div class="code-line"><span class="cmt">// ✅ All beans initialized successfully</span></div>
+<div class="code-line"><span class="cmt">// 💼 Ready to accept opportunities</span></div>
             </div>
+            <div class="hero-right">
+              <img class="profile-photo" src="https://avatars.githubusercontent.com/keepcodingmuttahir" alt="Muttahir Islam" onerror="this.style.display='none'"/>
+              <div class="hero-name">Muttahir <span>Islam</span></div>
+              <div class="hero-role">☕ Software Engineer</div>
+              <div class="hero-bio">
+                Specializing in Java, Spring Boot, Vue.js, Quasar, React & AI integrations. Building enterprise-level cloud-friendly software with 20+ production-ready features.
+              </div>
+              <div class="hero-btns">
+                <a class="btn btn-primary" onclick="switchTab('projects')">View Projects →</a>
+                <a class="btn btn-ghost" href="mailto:hire@muttahirislam.dev">Hire Me</a>
+              </div>
+            </div>
+          </div>
         </div>
-    </nav>
 
-    <section id="about" class="pt-32 pb-20 px-6">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
-            <div class="flex-1 text-center md:text-left">
-                <h2 class="text-blue-600 font-semibold mb-2">Full Stack Java Developer</h2>
-                <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-6">Building robust <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">backend solutions.</span></h1>
-                <p class="text-lg text-slate-600 mb-8 max-w-xl">
-                    I specialize in **Spring Boot**, **Java**, and **React**. Currently sharing my journey through the "100 Days of Spring Boot" series and scaling enterprise-grade applications.
-                </p>
-                <div class="flex justify-center md:justify-start gap-4">
-                    <a href="https://linkedin.com" target="_blank" class="p-3 bg-slate-200 rounded-full hover:bg-blue-100 hover:text-blue-600 transition"><i class="fab fa-linkedin-in text-xl"></i></a>
-                    <a href="https://github.com" target="_blank" class="p-3 bg-slate-200 rounded-full hover:bg-slate-800 hover:text-white transition"><i class="fab fa-github text-xl"></i></a>
-                </div>
+        <!-- ===== ABOUT PAGE ===== -->
+        <div class="page" id="page-about">
+          <div class="about-layout">
+            <div class="about-code">
+<div class="code-line"><span class="ann">@Component</span></div>
+<div class="code-line"><span class="kw">public class </span><span class="cls">About </span><span class="kw">implements </span><span class="cls">Developer </span><span class="punct">{</span></div>
+<div class="code-line">&nbsp;</div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="cmt">// ── Education ──────────────────────────────</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">private final </span><span class="cls">Education </span><span class="var">education</span><span class="punct"> = </span><span class="cls">Education</span><span class="punct">.</span><span class="fn">builder</span><span class="punct">()</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="punct">.</span><span class="fn">degree</span><span class="punct">(</span><span class="str">"BSc Information Technology"</span><span class="punct">)</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="punct">.</span><span class="fn">university</span><span class="punct">(</span><span class="str">"Punjab University (PUCIT)"</span><span class="punct">)</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="punct">.</span><span class="fn">cgpa</span><span class="punct">(</span><span class="num">3.54</span><span class="punct">)</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="punct">.</span><span class="fn">build</span><span class="punct">();</span></div>
+<div class="code-line">&nbsp;</div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="cmt">// ── Certifications ─────────────────────────</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">private final </span><span class="cls">List</span><span class="punct">&lt;</span><span class="cls">Certification</span><span class="punct">&gt; </span><span class="var">certs</span><span class="punct"> = </span><span class="cls">List</span><span class="punct">.</span><span class="fn">of</span><span class="punct">(</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">new </span><span class="cls">Certification</span><span class="punct">(</span><span class="str">"Cloud Fundamentals"</span><span class="punct">, </span><span class="str">"Coursera"</span><span class="punct">),</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">new </span><span class="cls">Certification</span><span class="punct">(</span><span class="str">"Introduction to AWS"</span><span class="punct">, </span><span class="str">"Coursera"</span><span class="punct">)</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="punct">);</span></div>
+<div class="code-line">&nbsp;</div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="cmt">// ── Skills ─────────────────────────────────</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="ann">@Override</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">public </span><span class="cls">SkillSet </span><span class="fn">getSkills</span><span class="punct">() {</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return </span><span class="cls">SkillSet</span><span class="punct">.</span><span class="fn">builder</span><span class="punct">()</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="punct">.</span><span class="fn">languages</span><span class="punct">(</span><span class="str">"Java"</span><span class="punct">, </span><span class="str">"JavaScript"</span><span class="punct">, </span><span class="str">".NET"</span><span class="punct">, </span><span class="str">"HTML"</span><span class="punct">, </span><span class="str">"CSS"</span><span class="punct">)</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="punct">.</span><span class="fn">frameworks</span><span class="punct">(</span><span class="str">"Spring Boot"</span><span class="punct">, </span><span class="str">"Vue.js"</span><span class="punct">, </span><span class="str">"Quasar"</span><span class="punct">, </span><span class="str">"React"</span><span class="punct">)</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="punct">.</span><span class="fn">tools</span><span class="punct">(</span><span class="str">"Docker"</span><span class="punct">, </span><span class="str">"Kubernetes"</span><span class="punct">, </span><span class="str">"AWS"</span><span class="punct">, </span><span class="str">"Keycloak"</span><span class="punct">)</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="punct">.</span><span class="fn">build</span><span class="punct">();</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="punct">}</span></div>
+<div class="code-line"><span class="punct">}</span></div>
             </div>
-            <div class="flex-1 flex justify-center">
-                <div class="relative">
-                    <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-400 rounded-full blur opacity-25"></div>
-                    <div class="relative w-64 h-64 bg-white rounded-full overflow-hidden border-4 border-white shadow-2xl flex items-center justify-center text-6xl font-bold text-blue-600">
-                        MI
-                    </div>
+            <div class="about-right">
+              <!-- Education -->
+              <div class="section-label">Education</div>
+              <div style="margin-bottom:20px;">
+                <div style="font-size:13px;font-weight:700;color:var(--accent);font-family:var(--font-ui);">BSc Information Technology</div>
+                <div style="font-size:12px;color:var(--text2);font-family:var(--font-ui);margin-top:3px;">Punjab University College of IT (PUCIT)</div>
+                <div style="font-size:11px;color:var(--green2);font-family:var(--font-ui);margin-top:2px;">CGPA: 3.54 / 4.00</div>
+              </div>
+
+              <!-- Certifications -->
+              <div class="section-label">Certifications</div>
+              <div style="margin-bottom:20px;">
+                <div style="margin-bottom:8px;">
+                  <div style="font-size:12px;color:var(--accent);font-family:var(--font-ui);">☁ Cloud Fundamentals</div>
+                  <a href="https://www.coursera.org/account/accomplishments/verify/EEHWGRUS43CP" target="_blank" style="font-size:10px;color:var(--blue2);font-family:var(--font-ui);text-decoration:none;">Coursera Certificate ↗</a>
                 </div>
+                <div>
+                  <div style="font-size:12px;color:var(--accent);font-family:var(--font-ui);">☁ Introduction to AWS</div>
+                  <a href="https://www.coursera.org/account/accomplishments/verify/C45CLVYNHFHZ" target="_blank" style="font-size:10px;color:var(--blue2);font-family:var(--font-ui);text-decoration:none;">Coursera Certificate ↗</a>
+                </div>
+              </div>
+
+              <!-- Languages -->
+              <div class="section-label">Languages</div>
+              <div class="skill-grid" style="margin-bottom:16px;">
+                <div class="skill-card"><div class="skill-icon">☕</div><div class="skill-name">Java</div></div>
+                <div class="skill-card"><div class="skill-icon">🟨</div><div class="skill-name">JavaScript</div></div>
+                <div class="skill-card"><div class="skill-icon">🔷</div><div class="skill-name">.NET</div></div>
+                <div class="skill-card"><div class="skill-icon">🌐</div><div class="skill-name">HTML</div></div>
+                <div class="skill-card"><div class="skill-icon">🎨</div><div class="skill-name">CSS</div></div>
+              </div>
+
+              <!-- Frameworks -->
+              <div class="section-label">Frameworks</div>
+              <div class="skill-grid" style="margin-bottom:16px;">
+                <div class="skill-card"><div class="skill-icon">🍃</div><div class="skill-name">Spring Boot</div></div>
+                <div class="skill-card"><div class="skill-icon">💚</div><div class="skill-name">Vue.js</div></div>
+                <div class="skill-card"><div class="skill-icon">⚡</div><div class="skill-name">Quasar</div></div>
+                <div class="skill-card"><div class="skill-icon">⚛️</div><div class="skill-name">React</div></div>
+                <div class="skill-card"><div class="skill-icon">🤖</div><div class="skill-name">AI Integrations</div></div>
+              </div>
+
+              <!-- Tools -->
+              <div class="section-label">Tools & DevOps</div>
+              <div class="skill-grid">
+                <div class="skill-card"><div class="skill-icon">🐳</div><div class="skill-name">Docker</div></div>
+                <div class="skill-card"><div class="skill-icon">☸️</div><div class="skill-name">Kubernetes</div></div>
+                <div class="skill-card"><div class="skill-icon">☁️</div><div class="skill-name">AWS</div></div>
+                <div class="skill-card"><div class="skill-icon">🔐</div><div class="skill-name">Keycloak</div></div>
+                <div class="skill-card"><div class="skill-icon">🦊</div><div class="skill-name">GitLab</div></div>
+                <div class="skill-card"><div class="skill-icon">📮</div><div class="skill-name">Postman</div></div>
+                <div class="skill-card"><div class="skill-icon">🪟</div><div class="skill-name">IntelliJ</div></div>
+                <div class="skill-card"><div class="skill-icon">📋</div><div class="skill-name">Jira</div></div>
+                <div class="skill-card"><div class="skill-icon">🗂</div><div class="skill-name">Sourcetree</div></div>
+                <div class="skill-card"><div class="skill-icon">💬</div><div class="skill-name">Slack</div></div>
+                <div class="skill-card"><div class="skill-icon">💙</div><div class="skill-name">Mattermost</div></div>
+                <div class="skill-card"><div class="skill-icon">📧</div><div class="skill-name">Freescout</div></div>
+              </div>
             </div>
+          </div>
         </div>
-    </section>
 
-    <section id="tech" class="py-20 bg-slate-100">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h3 class="text-3xl font-bold">Technical Arsenal</h3>
-                <p class="text-slate-500 mt-2">Tools I use to bring ideas to life.</p>
+        <!-- ===== PROJECTS PAGE ===== -->
+        <div class="page" id="page-projects">
+          <div class="proj-layout">
+            <div class="proj-code">
+<div class="code-line"><span class="cmt">&lt;!-- Projects.xml --&gt;</span></div>
+<div class="code-line"><span class="tag">&lt;projects</span> <span class="attr">xmlns</span><span class="punct">=</span><span class="val">"muttahir.portfolio"</span><span class="tag">&gt;</span></div>
+<div class="code-line">&nbsp;</div>
+<div class="code-line">&nbsp;&nbsp;<span class="tag">&lt;project</span> <span class="attr">type</span><span class="punct">=</span><span class="val">"professional"</span> <span class="attr">status</span><span class="punct">=</span><span class="val">"production"</span><span class="tag">&gt;</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;name&gt;</span><span class="var">OrderLab</span><span class="tag">&lt;/name&gt;</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;period&gt;</span><span class="var">Oct 2023 – May 2025</span><span class="tag">&lt;/period&gt;</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;role&gt;</span><span class="var">Full Stack Developer</span><span class="tag">&lt;/role&gt;</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;stack&gt;</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;tech&gt;</span><span class="str">Spring Boot</span><span class="tag">&lt;/tech&gt;</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;tech&gt;</span><span class="str">Vue.js</span><span class="tag">&lt;/tech&gt;</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;tech&gt;</span><span class="str">Keycloak</span><span class="tag">&lt;/tech&gt;</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/stack&gt;</span></div>
+<div class="code-line">&nbsp;&nbsp;<span class="tag">&lt;/project&gt;</span></div>
+<div class="code-line">&nbsp;</div>
+<div class="code-line">&nbsp;&nbsp;<span class="tag">&lt;project</span> <span class="attr">type</span><span class="punct">=</span><span class="val">"professional"</span> <span class="attr">status</span><span class="punct">=</span><span class="val">"active"</span><span class="tag">&gt;</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;name&gt;</span><span class="var">Munasib</span><span class="tag">&lt;/name&gt;</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;period&gt;</span><span class="var">Oct 2025 – Present</span><span class="tag">&lt;/period&gt;</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;role&gt;</span><span class="var">Full Stack Developer</span><span class="tag">&lt;/role&gt;</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;stack&gt;</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;tech&gt;</span><span class="str">Spring Boot</span><span class="tag">&lt;/tech&gt;</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;tech&gt;</span><span class="str">Vue.js</span><span class="tag">&lt;/tech&gt;</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;tech&gt;</span><span class="str">AI</span><span class="tag">&lt;/tech&gt;</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/stack&gt;</span></div>
+<div class="code-line">&nbsp;&nbsp;<span class="tag">&lt;/project&gt;</span></div>
+<div class="code-line">&nbsp;</div>
+<div class="code-line">&nbsp;&nbsp;<span class="tag">&lt;project</span> <span class="attr">type</span><span class="punct">=</span><span class="val">"academic"</span> <span class="attr">status</span><span class="punct">=</span><span class="val">"complete"</span><span class="tag">&gt;</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;name&gt;</span><span class="var">Asaan Rasta</span><span class="tag">&lt;/name&gt;</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;period&gt;</span><span class="var">Final Year Project</span><span class="tag">&lt;/period&gt;</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;stack&gt;</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;tech&gt;</span><span class="str">.NET</span><span class="tag">&lt;/tech&gt;</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;tech&gt;</span><span class="str">React</span><span class="tag">&lt;/tech&gt;</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/stack&gt;</span></div>
+<div class="code-line">&nbsp;&nbsp;<span class="tag">&lt;/project&gt;</span></div>
+<div class="code-line">&nbsp;</div>
+<div class="code-line"><span class="tag">&lt;/projects&gt;</span></div>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="p-6 bg-white rounded-2xl shadow-sm border border-slate-200 hover:border-blue-400 transition group text-center">
-                    <i class="fab fa-java text-4xl mb-4 text-orange-500 group-hover:scale-110 transition"></i>
-                    <p class="font-semibold text-slate-800">Java / Spring Boot</p>
+            <div class="proj-right">
+              <div class="section-label">Projects</div>
+
+              <!-- OrderLab -->
+              <div class="proj-card">
+                <div class="proj-header">
+                  <div class="proj-logo"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%23001f4d'/%3E%3Ccircle cx='50' cy='40' r='18' fill='none' stroke='%234e9cf5' stroke-width='6'/%3E%3Cpath d='M34 40 L50 22 L66 40' fill='none' stroke='%23e05252' stroke-width='5' stroke-linecap='round'/%3E%3Crect x='30' y='60' width='40' height='6' rx='3' fill='%234e9cf5'/%3E%3C/svg%3E" alt="OrderLab"/></div>
+                  <div>
+                    <div class="proj-name">OrderLab</div>
+                    <div class="proj-period">Oct 2023 – May 2025 · Full Stack Developer</div>
+                  </div>
                 </div>
-                <div class="p-6 bg-white rounded-2xl shadow-sm border border-slate-200 hover:border-blue-400 transition group text-center">
-                    <i class="fab fa-react text-4xl mb-4 text-cyan-400 group-hover:scale-110 transition"></i>
-                    <p class="font-semibold text-slate-800">React / Next.js</p>
+                <div class="proj-desc">Co-developed a B2B platform to optimize and automate supply chain & procurement for a 5-person team, deployed to production with agile practices.</div>
+                <div class="proj-tags">
+                  <span class="proj-tag">Spring Boot</span>
+                  <span class="proj-tag">Vue.js</span>
+                  <span class="proj-tag">Keycloak</span>
+                  <span class="proj-tag">Microservices</span>
+                  <span class="proj-tag">Docker</span>
                 </div>
-                <div class="p-6 bg-white rounded-2xl shadow-sm border border-slate-200 hover:border-blue-400 transition group text-center">
-                    <i class="fas fa-database text-4xl mb-4 text-blue-500 group-hover:scale-110 transition"></i>
-                    <p class="font-semibold text-slate-800">PostgreSQL / Redis</p>
+              </div>
+
+              <!-- Munasib -->
+              <div class="proj-card">
+                <div class="proj-header">
+                  <div class="proj-logo"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%23f0f4f8'/%3E%3Ccircle cx='30' cy='50' r='12' fill='%23001f3f'/%3E%3Ccircle cx='70' cy='50' r='12' fill='%23001f3f'/%3E%3Cpath d='M42 50 Q50 35 58 50' fill='none' stroke='%23001f3f' stroke-width='4'/%3E%3Ctext x='50' y='80' text-anchor='middle' font-size='10' fill='%23001f3f' font-family='serif' font-weight='bold'%3EMUNASIB%3C/text%3E%3C/svg%3E" alt="Munasib"/></div>
+                  <div>
+                    <div class="proj-name">Munasib</div>
+                    <div class="proj-period">Oct 2025 – Present · Full Stack Developer</div>
+                  </div>
                 </div>
-                <div class="p-6 bg-white rounded-2xl shadow-sm border border-slate-200 hover:border-blue-400 transition group text-center">
-                    <i class="fas fa-shield-alt text-4xl mb-4 text-slate-700 group-hover:scale-110 transition"></i>
-                    <p class="font-semibold text-slate-800">Keycloak / Security</p>
+                <div class="proj-desc">AI-driven e-commerce platform with intelligent pricing negotiation and enhanced buyer–seller engagement for dynamic online transactions at scale.</div>
+                <div class="proj-tags">
+                  <span class="proj-tag">Spring Boot</span>
+                  <span class="proj-tag">Vue.js</span>
+                  <span class="proj-tag">AI Integration</span>
+                  <span class="proj-tag">Microservices</span>
                 </div>
+              </div>
+
+              <!-- Asaan Rasta -->
+              <div class="proj-card">
+                <div class="proj-header">
+                  <div class="proj-logo" style="background:linear-gradient(135deg,#1a472a,#2d6a4f);font-size:20px;color:white;">🗺</div>
+                  <div>
+                    <div class="proj-name">Asaan Rasta</div>
+                    <div class="proj-period">Final Year Project · Academic</div>
+                  </div>
+                </div>
+                <div class="proj-desc">Route finder app providing best local transport routes for students and office workers — an affordable alternative to ride-hailing services.</div>
+                <div class="proj-tags">
+                  <span class="proj-tag">.NET</span>
+                  <span class="proj-tag">React</span>
+                  <span class="proj-tag">Maps API</span>
+                  <span class="proj-tag">Route Optimization</span>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-    </section>
 
-    <section id="projects" class="py-20 px-6">
-        <div class="max-w-6xl mx-auto">
-            <h3 class="text-3xl font-bold mb-12">Featured Projects</h3>
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="group bg-white rounded-3xl overflow-hidden border border-slate-200 hover:shadow-xl transition">
-                    <div class="h-48 bg-slate-200 flex items-center justify-center group-hover:bg-blue-50 transition">
-                        <i class="fas fa-code text-5xl text-slate-400 group-hover:text-blue-600 transition"></i>
-                    </div>
-                    <div class="p-8">
-                        <h4 class="text-xl font-bold mb-2">Spring Boot "100 Days" Series</h4>
-                        <p class="text-slate-600 mb-4">A complete deep-dive into Spring Boot backend development, covering everything from DI to Security.</p>
-                        <div class="flex gap-2">
-                            <span class="text-xs font-bold px-2 py-1 bg-slate-100 rounded">Java</span>
-                            <span class="text-xs font-bold px-2 py-1 bg-slate-100 rounded">Microservices</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="group bg-white rounded-3xl overflow-hidden border border-slate-200 hover:shadow-xl transition">
-                    <div class="h-48 bg-slate-200 flex items-center justify-center group-hover:bg-cyan-50 transition">
-                        <i class="fas fa-user-lock text-5xl text-slate-400 group-hover:text-cyan-600 transition"></i>
-                    </div>
-                    <div class="p-8">
-                        <h4 class="text-xl font-bold mb-2">IAM Identity Manager</h4>
-                        <p class="text-slate-600 mb-4">Full-stack implementation of Keycloak with custom authentication flows and RBAC.</p>
-                        <div class="flex gap-2">
-                            <span class="text-xs font-bold px-2 py-1 bg-slate-100 rounded">Keycloak</span>
-                            <span class="text-xs font-bold px-2 py-1 bg-slate-100 rounded">React</span>
-                        </div>
-                    </div>
-                </div>
+        <!-- ===== EXPERIENCE PAGE ===== -->
+        <div class="page" id="page-experience">
+          <div class="exp-layout">
+            <div class="exp-code">
+<div class="code-line"><span class="cmt">// Experience.kt</span></div>
+<div class="code-line"><span class="kw">data class </span><span class="cls">Experience</span><span class="punct">(</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">val </span><span class="var">company</span><span class="punct">: </span><span class="cls">String</span><span class="punct">,</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">val </span><span class="var">role</span><span class="punct">: </span><span class="cls">String</span><span class="punct">,</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">val </span><span class="var">period</span><span class="punct">: </span><span class="cls">String</span><span class="punct">,</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">val </span><span class="var">highlights</span><span class="punct">: </span><span class="cls">List</span><span class="punct">&lt;</span><span class="cls">String</span><span class="punct">&gt;</span></div>
+<div class="code-line"><span class="punct">)</span></div>
+<div class="code-line">&nbsp;</div>
+<div class="code-line"><span class="kw">val </span><span class="var">career</span><span class="punct"> = </span><span class="fn">listOf</span><span class="punct">(</span></div>
+<div class="code-line">&nbsp;</div>
+<div class="code-line">&nbsp;&nbsp;<span class="cls">Experience</span><span class="punct">(</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="var">company</span><span class="punct"> = </span><span class="str">"Redmath"</span><span class="punct">,</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="var">role</span><span class="punct"> = </span><span class="str">"Software Engineer"</span><span class="punct">,</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="var">period</span><span class="punct"> = </span><span class="str">"Aug 2023 – May 2025"</span><span class="punct">,</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="var">location</span><span class="punct"> = </span><span class="str">"Lahore, PK"</span><span class="punct">,</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="var">highlights</span><span class="punct"> = </span><span class="fn">listOf</span><span class="punct">(</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"Reduced API response times by 40%"</span><span class="punct">,</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"Reduced login support tickets by 60%"</span><span class="punct">,</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"Led Kafka, Feign, Apache Ignite integrations"</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="punct">)</span></div>
+<div class="code-line">&nbsp;&nbsp;<span class="punct">),</span></div>
+<div class="code-line">&nbsp;</div>
+<div class="code-line">&nbsp;&nbsp;<span class="cls">Experience</span><span class="punct">(</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="var">company</span><span class="punct"> = </span><span class="str">"Punjab University (PUCIT)"</span><span class="punct">,</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="var">role</span><span class="punct"> = </span><span class="str">"Teaching Assistant"</span><span class="punct">,</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="var">period</span><span class="punct"> = </span><span class="str">"Sep 2021 – Apr 2022"</span><span class="punct">,</span></div>
+<div class="code-line">&nbsp;&nbsp;<span class="punct">),</span></div>
+<div class="code-line">&nbsp;</div>
+<div class="code-line">&nbsp;&nbsp;<span class="cls">Experience</span><span class="punct">(</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="var">company</span><span class="punct"> = </span><span class="str">"Devsinc"</span><span class="punct">,</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="var">role</span><span class="punct"> = </span><span class="str">"Campus Ambassador"</span><span class="punct">,</span></div>
+<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="var">period</span><span class="punct"> = </span><span class="str">"Oct 2022 – Jul 2023"</span><span class="punct">,</span></div>
+<div class="code-line">&nbsp;&nbsp;<span class="punct">)</span></div>
+<div class="code-line"><span class="punct">)</span></div>
             </div>
+            <div class="exp-right">
+              <div class="section-label">Professional Experience</div>
+
+              <div class="exp-card current">
+                <div class="exp-company">Redmath</div>
+                <div class="exp-role">Software Engineer</div>
+                <div class="exp-meta">Aug 2023 – May 2025 · Lahore, Pakistan</div>
+                <div class="exp-bullet">Translated complex business requirements into scalable technical solutions, directly contributing to faster release cycles.</div>
+                <div class="exp-bullet">Designed high-performance REST APIs with Spring Boot, reducing API response times by <span class="exp-hl">40%</span> and improving service stability.</div>
+                <div class="exp-bullet">Led PoC efforts across distributed systems using <span class="exp-hl">Kafka</span>, Feign, Apache Ignite, and MySQL for real-time data flow.</div>
+                <div class="exp-bullet">Upgraded & customized Keycloak auth layer, reducing login-related support tickets by <span class="exp-hl">60%</span>.</div>
+              </div>
+
+              <div class="exp-card">
+                <div class="exp-company">Devsinc</div>
+                <div class="exp-role">Campus Ambassador</div>
+                <div class="exp-meta">Oct 2022 – Jul 2023 · Lahore, Pakistan</div>
+                <div class="exp-bullet">Bridged the gap between industry and academia by organizing bootcamps and student events across campus.</div>
+              </div>
+
+              <div class="exp-card">
+                <div class="exp-company">Punjab University (PUCIT)</div>
+                <div class="exp-role">Teaching Assistant</div>
+                <div class="exp-meta">Sep 2021 – Apr 2022 · Lahore, Pakistan</div>
+                <div class="exp-bullet">Supported students in labs, strengthened programming concepts and boosted overall academic performance.</div>
+              </div>
+            </div>
+          </div>
         </div>
-    </section>
 
-    <footer class="py-12 border-t border-slate-200 text-center">
-        <p class="text-slate-500 text-sm">© 2026 Muttahir Islam. Designed for Performance.</p>
-    </footer>
+        <!-- ===== CONTACT PAGE ===== -->
+        <div class="page" id="page-contact">
+          <div class="contact-layout">
+            <div class="contact-box">
+              <div class="contact-title">contact.yaml</div>
+              <div class="contact-sub">Feel free to reach out. I'm always open to new opportunities and collaborations.</div>
+              <div class="contact-code">
+                <div class="contact-line"><span class="tag">socials</span><span class="punct">:</span></div>
+                <div class="contact-line" style="padding-left:16px;">
+                  <span class="prop">email</span><span class="contact-colon">:</span>
+                  <span class="contact-val"><a href="mailto:hire@muttahirislam.dev">hire@muttahirislam.dev</a></span>
+                </div>
+                <div class="contact-line" style="padding-left:16px;">
+                  <span class="prop">github</span><span class="contact-colon">:</span>
+                  <span class="contact-val"><a href="https://github.com/keepcodingmuttahir" target="_blank">keepcodingmuttahir</a></span>
+                </div>
+                <div class="contact-line" style="padding-left:16px;">
+                  <span class="prop">linkedin</span><span class="contact-colon">:</span>
+                  <span class="contact-val"><a href="https://linkedin.com/in/muttahirislam" target="_blank">muttahirislam</a></span>
+                </div>
+                <div class="contact-line" style="padding-left:16px;">
+                  <span class="prop">location</span><span class="contact-colon">:</span>
+                  <span class="contact-val" style="color:var(--yellow2);">Lahore, Pakistan</span>
+                </div>
+                <div class="contact-line" style="padding-left:16px;">
+                  <span class="prop">available</span><span class="contact-colon">:</span>
+                  <span class="contact-val" style="color:var(--green2);">true</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
+      </div><!-- /code-area -->
+    </div><!-- /editor-content -->
+
+    <!-- STATUS BAR -->
+    <div class="status-bar">
+      <div class="status-item">
+        <span>⎇</span>
+        <span class="status-branch">main</span>
+      </div>
+      <div class="status-item">☕ Java 21</div>
+      <div class="status-item status-ok">✓ 0 errors</div>
+      <div class="status-right">
+        <span id="lineCol">1:1</span>
+        <span>UTF-8</span>
+        <span>LF</span>
+        <span>IntelliJ IDEA</span>
+      </div>
+    </div>
+
+  </div><!-- /editor-area -->
+</div><!-- /app -->
+
+<script>
+const pages = ['home','about','projects','experience','contact'];
+const breadcrumbs = {
+  home: ['portfolio','src','Home.java','MuttahirIslam'],
+  about: ['portfolio','src','About.java','About'],
+  projects: ['portfolio','src','Projects.xml'],
+  experience: ['portfolio','src','Experience.kt','career'],
+  contact: ['portfolio','resources','contact.yaml','socials']
+};
+
+function switchTab(name) {
+  pages.forEach(p => {
+    document.getElementById('page-'+p).classList.remove('active');
+    document.getElementById('tab-'+p).classList.remove('active');
+  });
+  document.querySelectorAll('.tree-item').forEach(i => i.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  document.getElementById('tab-'+name).classList.add('active');
+
+  // update breadcrumb
+  const bc = breadcrumbs[name];
+  const bcEl = document.getElementById('breadcrumb');
+  bcEl.innerHTML = bc.map((s,i) => i<bc.length-1 ? `<span>${s}</span><span class="sep"> › </span>` : `<span>${s}</span>`).join('');
+
+  // update line numbers
+  updateLineNumbers();
+
+  // update tree active
+  const map = {home:'Home.java',about:'About.java',projects:'Projects.xml',experience:'Experience.kt',contact:'contact.yaml'};
+  document.querySelectorAll('.tree-item').forEach(i => {
+    if(i.querySelector('.file-name') && i.querySelector('.file-name').textContent === map[name]) {
+      i.classList.add('active');
+    }
+  });
+}
+
+function updateLineNumbers() {
+  const activePage = document.querySelector('.page.active');
+  const lines = activePage ? activePage.querySelectorAll('.code-line').length : 30;
+  const ln = document.getElementById('lineNums');
+  ln.innerHTML = '';
+  for(let i=1;i<=Math.max(lines+5,30);i++){
+    const d = document.createElement('div');
+    d.className = 'line-num';
+    d.textContent = i;
+    ln.appendChild(d);
+  }
+}
+
+// init
+updateLineNumbers();
+
+// keyboard nav
+document.addEventListener('keydown', e => {
+  if(e.altKey) {
+    const idx = pages.indexOf(document.querySelector('.tab.active')?.id?.replace('tab-',''));
+    if(e.key === 'ArrowRight' && idx < pages.length-1) switchTab(pages[idx+1]);
+    if(e.key === 'ArrowLeft' && idx > 0) switchTab(pages[idx-1]);
+  }
+});
+</script>
 </body>
 </html>
