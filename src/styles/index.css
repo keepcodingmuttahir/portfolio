@@ -1,0 +1,158 @@
+/* ================================================================
+   IntelliJ High Contrast Dark Theme
+   Global CSS Variables & Base Styles
+   ================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* ── Backgrounds ──────────────────────────────── */
+  --bg-root      : #000000;
+  --bg-editor    : #0d0d0d;
+  --bg-sidebar   : #0a0a0a;
+  --bg-tab-bar   : #0d0d0d;
+  --bg-tab-active: #111111;
+  --bg-elevated  : #1a1a1a;
+  --bg-card      : #141414;
+  --bg-input     : #0f0f0f;
+
+  /* ── Borders ──────────────────────────────────── */
+  --border-subtle : #1e1e1e;
+  --border-default: #2a2a2a;
+  --border-strong : #3a3a3a;
+
+  /* ── Text ─────────────────────────────────────── */
+  --text-primary  : #e8e8e8;
+  --text-secondary: #a0a0a0;
+  --text-muted    : #666666;
+  --text-faint    : #3a3a3a;
+
+  /* ── Syntax Highlight Colors ──────────────────── */
+  --syn-keyword   : #cc7832;
+  --syn-keyword2  : #cf8e6d;
+  --syn-string    : #6aab73;
+  --syn-string2   : #a9c97b;
+  --syn-number    : #2aacb8;
+  --syn-comment   : #7a7e85;
+  --syn-function  : #56a8f5;
+  --syn-class     : #ffc66d;
+  --syn-property  : #9876aa;
+  --syn-annotation: #bbb529;
+  --syn-tag       : #e8bf6a;
+  --syn-attribute : #bababa;
+  --syn-value     : #6aab73;
+
+  /* ── Brand / Accent ───────────────────────────── */
+  --accent        : #fe8019;
+  --accent-dim    : #d65d0e;
+  --accent-glow   : rgba(254, 128, 25, 0.15);
+  --intellij-blue : #4e9cf5;
+  --green-bright  : #b8bb26;
+  --green-dim     : #98971a;
+  --yellow-bright : #fabd2f;
+  --yellow-dim    : #d79921;
+  --purple-bright : #d3869b;
+  --purple-dim    : #b16286;
+  --cyan-bright   : #8ec07c;
+  --cyan-dim      : #689d6a;
+  --red-bright    : #fb4934;
+  --red-dim       : #cc241d;
+
+  /* ── Typography ───────────────────────────────── */
+  --font-mono : 'JetBrains Mono', 'Fira Code', monospace;
+  --font-ui   : 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* ── Spacing ──────────────────────────────────── */
+  --radius-sm : 4px;
+  --radius-md : 6px;
+  --radius-lg : 8px;
+
+  /* ── Transitions ──────────────────────────────── */
+  --transition-fast  : 0.12s ease;
+  --transition-normal: 0.2s ease;
+}
+
+/* ── Reset & Base ─────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing  : border-box;
+  margin      : 0;
+  padding     : 0;
+}
+
+html,
+body,
+#root {
+  height      : 100%;
+  overflow    : hidden;
+  background  : var(--bg-root);
+  color       : var(--text-primary);
+  font-family : var(--font-mono);
+  font-size   : 13px;
+  line-height : 1.5;
+  -webkit-font-smoothing : antialiased;
+}
+
+a {
+  color           : var(--intellij-blue);
+  text-decoration : none;
+  transition      : color var(--transition-fast);
+}
+
+a:hover {
+  color           : var(--accent);
+  text-decoration : underline;
+}
+
+/* ── Scrollbars ───────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width  : 6px;
+  height : 6px;
+}
+
+::-webkit-scrollbar-track {
+  background : transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background    : var(--border-default);
+  border-radius : 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background : var(--border-strong);
+}
+
+/* ── Syntax Token Utility Classes ─────────────────────────────── */
+.syn-keyword    { color : var(--syn-keyword);    }
+.syn-keyword2   { color : var(--syn-keyword2);   }
+.syn-string     { color : var(--syn-string);     }
+.syn-number     { color : var(--syn-number);     }
+.syn-comment    { color : var(--syn-comment);    font-style: italic; }
+.syn-function   { color : var(--syn-function);   }
+.syn-class      { color : var(--syn-class);      }
+.syn-property   { color : var(--syn-property);   }
+.syn-annotation { color : var(--syn-annotation); }
+.syn-tag        { color : var(--syn-tag);        }
+.syn-attribute  { color : var(--syn-attribute);  }
+.syn-value      { color : var(--syn-value);      }
+.syn-punct      { color : var(--syn-keyword);    }
+.syn-highlight  { color : var(--accent);         font-weight: 600; }
+.syn-dim        { color : var(--text-muted);     }
+
+/* ── Fade-in animation ────────────────────────────────────────── */
+@keyframes fadeIn {
+  from {
+    opacity   : 0;
+    transform : translateY(6px);
+  }
+  to {
+    opacity   : 1;
+    transform : translateY(0);
+  }
+}
+
+.fade-in {
+  animation : fadeIn 0.2s ease forwards;
+}
