@@ -3,44 +3,59 @@ import LineNumbers from '../components/LineNumbers.jsx';
 import ProjectCard from '../components/ProjectCard.jsx';
 import { projects } from '../data/portfolio.js';
 
-// ── XML / HTML token helpers ───────────────────────────────────
-const Tag  = ({ c }) => <span className="syn-tag">{ c }</span>;
-const Attr = ({ c }) => <span className="syn-attribute">{ c }</span>;
-const Val  = ({ c }) => <span className="syn-value">"{ c }"</span>;
-const Cmt  = ({ c }) => <span className="syn-comment">{ c }</span>;
-const Pun  = ({ c }) => <span className="syn-punct">{ c }</span>;
-const Str  = ({ c }) => <span className="syn-string">{ c }</span>;
+// ── Syntax token components ────────────────────────────────────
+const Tag  = ({ children }) => <span className="syn-tag">{ children }</span>;
+const Attr = ({ children }) => <span className="syn-attribute">{ children }</span>;
+const Val  = ({ children }) => <span className="syn-value">{ children }</span>;
+const Cmt  = ({ children }) => <span className="syn-comment">{ children }</span>;
+const Str  = ({ children }) => <span className="syn-string">{ children }</span>;
+const Pun  = ({ children }) => <span className="syn-punct">{ children }</span>;
 
-// Build code lines dynamically from projects data
-const buildCodeLines = () => {
+// Line helper: indent is a plain string, children are JSX tokens
+const L = ({ i = '', children }) => (
+  <div style={ codeLine }>
+    { i }{ children }
+  </div>
+);
+
+const codeLine = {
+  minHeight  : '22px',
+  display    : 'block',
+  lineHeight : '22px',
+  fontSize   : '13px',
+  whiteSpace : 'pre',
+};
+
+const emptyLine = <div style={ codeLine }> </div>;
+
+const buildLines = () => {
   const lines = [
-    <><Cmt c="&lt;!-- Projects.xml — Muttahir Islam --&gt;" /></>,
-    <><Tag c="&lt;projects " /><Attr c="xmlns" /><Pun c='=' /><Val c="muttahir.portfolio" /><Tag c="&gt;" /></>,
-    null,
+    <L key="c0"><Cmt>{'<!-- Projects.xml — Muttahir Islam -->'}</Cmt></L>,
+    <L key="c1"><Tag>{'<projects '}</Tag><Attr>{'xmlns'}</Attr><Pun>{'='}</Pun><Val>{'"muttahir.portfolio"'}</Val><Tag>{'>'}</Tag></L>,
+    emptyLine,
   ];
 
   projects.forEach((proj, idx) => {
+    const isActive = proj.period.includes('Present');
     lines.push(
-      <>&nbsp;&nbsp;<Tag c="&lt;project " /><Attr c="type" /><Pun c="=" /><Val c={ proj.type } /><Pun c=" " /><Attr c="status" /><Pun c="=" /><Val c={ proj.period.includes('Present') ? 'active' : 'complete' } /><Tag c="&gt;" /></>
+      <L key={ `p${idx}0` } i="  "><Tag>{'<project '}</Tag><Attr>{'type'}</Attr><Pun>{'='}</Pun><Val>{`"${proj.type}"`}</Val><Pun>{' '}</Pun><Attr>{'status'}</Attr><Pun>{'='}</Pun><Val>{ isActive ? '"active"' : '"complete"' }</Val><Tag>{'>'}</Tag></L>
     );
-    lines.push(<>&nbsp;&nbsp;&nbsp;&nbsp;<Tag c="&lt;name&gt;" /><Str c={ proj.name } /><Tag c="&lt;/name&gt;" /></>);
-    lines.push(<>&nbsp;&nbsp;&nbsp;&nbsp;<Tag c="&lt;period&gt;" /><Str c={ proj.period } /><Tag c="&lt;/period&gt;" /></>);
-    lines.push(<>&nbsp;&nbsp;&nbsp;&nbsp;<Tag c="&lt;role&gt;" /><Str c={ proj.role } /><Tag c="&lt;/role&gt;" /></>);
-    lines.push(<>&nbsp;&nbsp;&nbsp;&nbsp;<Tag c="&lt;stack&gt;" /></>);
-    proj.tags.slice(0, 3).forEach(tag => {
-      lines.push(<>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Tag c="&lt;tech&gt;" /><span className="syn-string">{ tag }</span><Tag c="&lt;/tech&gt;" /></>);
+    lines.push( <L key={ `p${idx}1` } i="    "><Tag>{'<name>'}</Tag><Str>{ proj.name }</Str><Tag>{'</name>'}</Tag></L> );
+    lines.push( <L key={ `p${idx}2` } i="    "><Tag>{'<period>'}</Tag><Str>{ proj.period }</Str><Tag>{'</period>'}</Tag></L> );
+    lines.push( <L key={ `p${idx}3` } i="    "><Tag>{'<role>'}</Tag><Str>{ proj.role }</Str><Tag>{'</role>'}</Tag></L> );
+    lines.push( <L key={ `p${idx}4` } i="    "><Tag>{'<stack>'}</Tag></L> );
+    proj.tags.slice(0, 3).forEach((tag, ti) => {
+      lines.push( <L key={ `p${idx}t${ti}` } i="      "><Tag>{'<tech>'}</Tag><Str>{ tag }</Str><Tag>{'</tech>'}</Tag></L> );
     });
-    lines.push(<>&nbsp;&nbsp;&nbsp;&nbsp;<Tag c="&lt;/stack&gt;" /></>);
-    lines.push(<>&nbsp;&nbsp;<Tag c="&lt;/project&gt;" /></>);
-    if (idx < projects.length - 1) lines.push(null);
+    lines.push( <L key={ `p${idx}5` } i="    "><Tag>{'</stack>'}</Tag></L> );
+    lines.push( <L key={ `p${idx}6` } i="  "><Tag>{'</project>'}</Tag></L> );
+    if (idx < projects.length - 1) lines.push( <div key={ `pe${idx}` } style={ codeLine }> </div> );
   });
 
-  lines.push(null);
-  lines.push(<><Tag c="&lt;/projects&gt;" /></>);
+  lines.push( <div key="empty2" style={ codeLine }> </div> );
+  lines.push( <L key="close"><Tag>{'</projects>'}</Tag></L> );
   return lines;
 };
-
-const CODE_LINES = buildCodeLines();
 
 const st = {
   wrapper: {
@@ -49,22 +64,16 @@ const st = {
     overflow : 'hidden',
   },
   codePanel: {
-    display  : 'flex',
-    flex     : '1',
-    overflow : 'hidden',
+    display   : 'flex',
+    flex      : '1',
+    overflow  : 'hidden',
   },
   codeArea: {
     flex      : '1',
     padding   : '20px 0 20px 18px',
     overflowY : 'auto',
+    overflowX : 'auto',
     lineHeight: '22px',
-  },
-  codeLine: {
-    minHeight : '22px',
-    fontSize  : '13px',
-    display   : 'flex',
-    alignItems: 'baseline',
-    flexWrap  : 'wrap',
   },
   rightPanel: {
     width      : '380px',
@@ -88,21 +97,17 @@ const st = {
 };
 
 export default function Projects() {
+  const lines = buildLines();
+
   return (
     <div style={ st.wrapper } className="fade-in">
-      { /* Left: XML code */ }
       <div style={ st.codePanel }>
-        <LineNumbers count={ CODE_LINES.length + 5 } />
+        <LineNumbers count={ lines.length + 5 } />
         <div style={ st.codeArea }>
-          { CODE_LINES.map((line, i) => (
-            <div key={ i } style={ st.codeLine }>
-              { line ?? <>&nbsp;</> }
-            </div>
-          )) }
+          { lines }
         </div>
       </div>
 
-      { /* Right: project cards */ }
       <div style={ st.rightPanel }>
         <div style={ st.sectionLabel }>Projects</div>
         { projects.map(project => (

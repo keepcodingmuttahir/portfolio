@@ -2,64 +2,78 @@ import React from 'react';
 import LineNumbers from '../components/LineNumbers.jsx';
 import { experience } from '../data/portfolio.js';
 
-// ── Kotlin syntax helpers ──────────────────────────────────────
-const Kw  = ({ c }) => <span className="syn-keyword">{ c }</span>;
-const Cls = ({ c }) => <span className="syn-class">{ c }</span>;
-const Str = ({ c }) => <span className="syn-string">"{ c }"</span>;
-const Cmt = ({ c }) => <span className="syn-comment">{ c }</span>;
-const Fn  = ({ c }) => <span className="syn-function">{ c }</span>;
-const Pun = ({ c }) => <span className="syn-punct">{ c }</span>;
+// ── Kotlin token components ────────────────────────────────────
+const Kw  = ({ children }) => <span className="syn-keyword">{ children }</span>;
+const Cls = ({ children }) => <span className="syn-class">{ children }</span>;
+const Str = ({ children }) => <span className="syn-string">{ children }</span>;
+const Cmt = ({ children }) => <span className="syn-comment">{ children }</span>;
+const Fn  = ({ children }) => <span className="syn-function">{ children }</span>;
+const Pun = ({ children }) => <span className="syn-punct">{ children }</span>;
 
-// Render a highlight tag: <hl>40%</hl> → orange span
+const codeLine = {
+  minHeight  : '22px',
+  display    : 'block',
+  lineHeight : '22px',
+  fontSize   : '13px',
+  whiteSpace : 'pre',
+};
+
+// Line helper — i is a plain indent string, children are colored tokens
+const L = ({ i = '', children }) => (
+  <div style={ codeLine }>{ i }{ children }</div>
+);
+
+// Render <hl>...</hl> markup inside bullet text as orange spans
 function renderBullet(text) {
-  const parts = text.split(/(<hl>.*?<\/hl>)/g);
-  return parts.map((part, i) => {
-    if (part.startsWith('<hl>')) {
-      const inner = part.replace(/<\/?hl>/g, '');
-      return <span key={ i } className="syn-highlight">{ inner }</span>;
-    }
-    return <span key={ i }>{ part }</span>;
-  });
+  return text.split(/(<hl>.*?<\/hl>)/g).map((part, i) =>
+    part.startsWith('<hl>')
+      ? <span key={ i } className="syn-highlight">{ part.replace(/<\/?hl>/g, '') }</span>
+      : <span key={ i }>{ part }</span>
+  );
 }
 
-const buildCodeLines = () => {
+const buildLines = () => {
   const lines = [
-    <><Cmt c="// Experience.kt — Muttahir Islam" /></>,
-    null,
-    <><Kw c="data class " /><Cls c="Experience" /><Pun c="(" /></>,
-    <>&nbsp;&nbsp;&nbsp;&nbsp;<Kw c="val " /><span>company</span><Pun c=": " /><Cls c="String" /><Pun c="," /></>,
-    <>&nbsp;&nbsp;&nbsp;&nbsp;<Kw c="val " /><span>role</span><Pun c=": " /><Cls c="String" /><Pun c="," /></>,
-    <>&nbsp;&nbsp;&nbsp;&nbsp;<Kw c="val " /><span>period</span><Pun c=": " /><Cls c="String" /><Pun c="," /></>,
-    <>&nbsp;&nbsp;&nbsp;&nbsp;<Kw c="val " /><span>highlights</span><Pun c=": " /><Cls c="List" /><Pun c="<" /><Cls c="String" /><Pun c=">" /></>,
-    <><Pun c=")" /></>,
-    null,
-    <><Kw c="val " /><span>career</span><Pun c=" = " /><Fn c="listOf" /><Pun c="(" /></>,
-    null,
+    <L key="c0"><Cmt>{'// Experience.kt — Muttahir Islam'}</Cmt></L>,
+    <div key="e0" style={ codeLine }> </div>,
+    <L key="dc"><Kw>{'data class '}</Kw><Cls>{'Experience'}</Cls><Pun>{'('}</Pun></L>,
+    <L key="d1" i="    "><Kw>{'val '}</Kw>{'company'}<Pun>{': '}</Pun><Cls>{'String'}</Cls><Pun>{','}</Pun></L>,
+    <L key="d2" i="    "><Kw>{'val '}</Kw>{'role'}<Pun>{'    : '}</Pun><Cls>{'String'}</Cls><Pun>{','}</Pun></L>,
+    <L key="d3" i="    "><Kw>{'val '}</Kw>{'period'}<Pun>{'  : '}</Pun><Cls>{'String'}</Cls><Pun>{','}</Pun></L>,
+    <L key="d4" i="    "><Kw>{'val '}</Kw>{'bullets'}<Pun>{': '}</Pun><Cls>{'List'}</Cls><Pun>{'<'}</Pun><Cls>{'String'}</Cls><Pun>{'>'}</Pun></L>,
+    <L key="d5"><Pun>{')'}</Pun></L>,
+    <div key="e1" style={ codeLine }> </div>,
+    <L key="lo"><Kw>{'val '}</Kw>{'career'}<Pun>{' = '}</Pun><Fn>{'listOf'}</Fn><Pun>{'('}</Pun></L>,
+    <div key="e2" style={ codeLine }> </div>,
   ];
 
   experience.forEach((job, idx) => {
-    lines.push(<>&nbsp;&nbsp;<Cls c="Experience" /><Pun c="(" /></>);
-    lines.push(<>&nbsp;&nbsp;&nbsp;&nbsp;<span>company</span><Pun c=" = " /><Str c={ job.company } /><Pun c="," /></>);
-    lines.push(<>&nbsp;&nbsp;&nbsp;&nbsp;<span>role</span><Pun c=" = " /><Str c={ job.role } /><Pun c="," /></>);
-    lines.push(<>&nbsp;&nbsp;&nbsp;&nbsp;<span>period</span><Pun c=" = " /><Str c={ job.period } /><Pun c="," /></>);
-    lines.push(<>&nbsp;&nbsp;&nbsp;&nbsp;<span>location</span><Pun c=" = " /><Str c={ job.location } /></>);
+    lines.push( <L key={ `j${idx}0` } i="  "><Cls>{'Experience'}</Cls><Pun>{'('}</Pun></L> );
+    lines.push( <L key={ `j${idx}1` } i="    ">{'company'}<Pun>{' = '}</Pun><Str>{`"${job.company}"`}</Str><Pun>{','}</Pun></L> );
+    lines.push( <L key={ `j${idx}2` } i="    ">{'role'}<Pun>{'    = '}</Pun><Str>{`"${job.role}"`}</Str><Pun>{','}</Pun></L> );
+    lines.push( <L key={ `j${idx}3` } i="    ">{'period'}<Pun>{'  = '}</Pun><Str>{`"${job.period}"`}</Str><Pun>{','}</Pun></L> );
+    lines.push( <L key={ `j${idx}4` } i="    ">{'location'}<Pun>{' = '}</Pun><Str>{`"${job.location}"`}</Str></L> );
+
     if (job.bullets.length > 0) {
-      lines.push(<>&nbsp;&nbsp;&nbsp;&nbsp;<span>highlights</span><Pun c=" = " /><Fn c="listOf" /><Pun c="(" /></>);
+      lines.push( <L key={ `j${idx}5` } i="    ">{'bullets'}<Pun>{'  = '}</Pun><Fn>{'listOf'}</Fn><Pun>{'('}</Pun></L> );
       job.bullets.slice(0, 2).forEach((b, bi) => {
-        const short = b.replace(/<\/?hl>/g, '').substring(0, 42) + '...';
-        lines.push(<>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Str c={ short } />{ bi < 1 ? <Pun c="," /> : null }</>);
+        const short = b.replace(/<\/?hl>/g, '').substring(0, 40) + '...';
+        lines.push(
+          <L key={ `j${idx}b${bi}` } i="        ">
+            <Str>{ `"${short}"` }</Str>{ bi === 0 ? <Pun>{','}</Pun> : null }
+          </L>
+        );
       });
-      lines.push(<>&nbsp;&nbsp;&nbsp;&nbsp;<Pun c=")," /></>);
+      lines.push( <L key={ `j${idx}6` } i="    "><Pun>{')'}</Pun></L> );
     }
-    lines.push(<>&nbsp;&nbsp;<Pun c={ idx < experience.length - 1 ? '),' : ')' } /></>);
-    if (idx < experience.length - 1) lines.push(null);
+
+    lines.push( <L key={ `j${idx}7` } i="  "><Pun>{ idx < experience.length - 1 ? '),' : ')' }</Pun></L> );
+    if (idx < experience.length - 1) lines.push( <div key={ `je${idx}` } style={ codeLine }> </div> );
   });
 
-  lines.push(<><Pun c=")" /></>);
+  lines.push( <L key="lc"><Pun>{')'}</Pun></L> );
   return lines;
 };
-
-const CODE_LINES = buildCodeLines();
 
 const st = {
   wrapper: {
@@ -76,14 +90,8 @@ const st = {
     flex      : '1',
     padding   : '20px 0 20px 18px',
     overflowY : 'auto',
+    overflowX : 'auto',
     lineHeight: '22px',
-  },
-  codeLine: {
-    minHeight : '22px',
-    fontSize  : '13px',
-    display   : 'flex',
-    alignItems: 'baseline',
-    flexWrap  : 'wrap',
   },
   rightPanel: {
     width      : '380px',
@@ -104,9 +112,6 @@ const st = {
     paddingBottom : '6px',
     borderBottom  : '1px solid #1e1e1e',
   },
-  timeline: {
-    position : 'relative',
-  },
   expCard: (current) => ({
     borderLeft   : `2px solid ${ current ? '#b8bb26' : '#2a2a2a' }`,
     paddingLeft  : '18px',
@@ -121,76 +126,46 @@ const st = {
     position     : 'absolute',
     left         : '-5px',
     top          : '4px',
-    boxShadow    : current ? '0 0 8px rgba(184, 187, 38, 0.5)' : 'none',
+    boxShadow    : current ? '0 0 8px rgba(184,187,38,0.5)' : 'none',
   }),
-  company: {
-    fontSize   : '14px',
-    fontWeight : '700',
-    color      : '#fe8019',
-    fontFamily : 'Inter, sans-serif',
+  company : { fontSize: '14px', fontWeight: '700', color: '#fe8019', fontFamily: 'Inter, sans-serif' },
+  role    : { fontSize: '12px', color: '#a0a0a0', fontFamily: 'Inter, sans-serif', margin: '2px 0' },
+  meta    : { fontSize: '10px', color: '#555555', fontFamily: 'Inter, sans-serif', marginBottom: '10px' },
+  bullet  : {
+    fontSize: '11px', color: '#888888', lineHeight: '1.7',
+    fontFamily: 'Inter, sans-serif', marginBottom: '6px',
+    paddingLeft: '12px', position: 'relative',
   },
-  role: {
-    fontSize   : '12px',
-    color      : '#a0a0a0',
-    fontFamily : 'Inter, sans-serif',
-    margin     : '2px 0',
-  },
-  meta: {
-    fontSize      : '10px',
-    color         : '#555555',
-    fontFamily    : 'Inter, sans-serif',
-    marginBottom  : '10px',
-  },
-  bullet: {
-    fontSize     : '11px',
-    color        : '#888888',
-    lineHeight   : '1.7',
-    fontFamily   : 'Inter, sans-serif',
-    marginBottom : '6px',
-    paddingLeft  : '12px',
-    position     : 'relative',
-  },
-  bulletDot: {
-    position : 'absolute',
-    left     : '0',
-    color    : '#fe8019',
-  },
+  bulletDot: { position: 'absolute', left: '0', color: '#fe8019' },
 };
 
 export default function Experience() {
+  const lines = buildLines();
+
   return (
     <div style={ st.wrapper } className="fade-in">
-      { /* Left: code */ }
       <div style={ st.codePanel }>
-        <LineNumbers count={ CODE_LINES.length + 5 } />
-        <div style={ st.codeArea }>
-          { CODE_LINES.map((line, i) => (
-            <div key={ i } style={ st.codeLine }>
-              { line ?? <>&nbsp;</> }
-            </div>
-          )) }
-        </div>
+        <LineNumbers count={ lines.length + 5 } />
+        <div style={ st.codeArea }>{ lines }</div>
       </div>
 
-      { /* Right: timeline */ }
       <div style={ st.rightPanel }>
         <div style={ st.sectionLabel }>Professional Experience</div>
-        <div style={ st.timeline }>
-          { experience.map(job => (
-            <div key={ job.id } style={ st.expCard(job.current) }>
-              <div style={ st.dot(job.current) } />
-              <div style={ st.company }>{ job.company }</div>
-              <div style={ st.role }>{ job.role }</div>
-              <div style={ st.meta }>{ job.period } · { job.location }</div>
-              { job.bullets.map((bullet, bi) => (
-                <div key={ bi } style={ st.bullet }>
-                  <span style={ st.bulletDot }>•</span>
-                  { renderBullet(bullet) }
-                </div>
-              )) }
-            </div>
-          )) }
-        </div>
+
+        { experience.map(job => (
+          <div key={ job.id } style={ st.expCard(job.current) }>
+            <div style={ st.dot(job.current) } />
+            <div style={ st.company }>{ job.company }</div>
+            <div style={ st.role }>{ job.role }</div>
+            <div style={ st.meta }>{ job.period } · { job.location }</div>
+            { job.bullets.map((bullet, bi) => (
+              <div key={ bi } style={ st.bullet }>
+                <span style={ st.bulletDot }>•</span>
+                { renderBullet(bullet) }
+              </div>
+            )) }
+          </div>
+        )) }
       </div>
     </div>
   );

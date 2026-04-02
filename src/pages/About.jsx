@@ -3,50 +3,62 @@ import LineNumbers from '../components/LineNumbers.jsx';
 import SkillCard from '../components/SkillCard.jsx';
 import { education, certifications, skills } from '../data/portfolio.js';
 
-// ── Syntax helpers ─────────────────────────────────────────────
-const Kw  = ({ c }) => <span className="syn-keyword">{ c }</span>;
-const Cls = ({ c }) => <span className="syn-class">{ c }</span>;
-const Str = ({ c }) => <span className="syn-string">"{ c }"</span>;
-const Ann = ({ c }) => <span className="syn-annotation">{ c }</span>;
-const Fn  = ({ c }) => <span className="syn-function">{ c }</span>;
-const Cmt = ({ c }) => <span className="syn-comment">{ c }</span>;
-const Pun = ({ c }) => <span className="syn-punct">{ c }</span>;
+// ── Syntax token components ────────────────────────────────────
+const Kw  = ({ children }) => <span className="syn-keyword">{ children }</span>;
+const Cls = ({ children }) => <span className="syn-class">{ children }</span>;
+const Str = ({ children }) => <span className="syn-string">{ children }</span>;
+const Ann = ({ children }) => <span className="syn-annotation">{ children }</span>;
+const Fn  = ({ children }) => <span className="syn-function">{ children }</span>;
+const Cmt = ({ children }) => <span className="syn-comment">{ children }</span>;
+const Num = ({ children }) => <span className="syn-number">{ children }</span>;
+const Pun = ({ children }) => <span className="syn-punct">{ children }</span>;
+
+const codeLine = {
+  minHeight  : '22px',
+  display    : 'block',
+  lineHeight : '22px',
+  fontSize   : '13px',
+  whiteSpace : 'pre',
+};
+
+const L = ({ i = '', children }) => (
+  <div style={ codeLine }>{ i }{ children }</div>
+);
 
 const CODE_LINES = [
-  <><Ann c="@Component" /></>,
-  <><Kw c="public class " /><Cls c="About " /><Kw c="implements " /><Cls c="Developer " /><Pun c="{" /></>,
-  null,
-  <>&nbsp;&nbsp;&nbsp;&nbsp;<Cmt c="// ── Education ────────────────────────────────" /></>,
-  <>&nbsp;&nbsp;&nbsp;&nbsp;<Kw c="private final " /><Cls c="Education " /><span>education</span><Pun c=" = " /><Cls c="Education" /><Pun c="." /><Fn c="builder" /><Pun c="()" /></>,
-  <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Pun c="." /><Fn c="degree" /><Pun c="(" /><Str c={ education.degree } /><Pun c=")" /></>,
-  <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Pun c="." /><Fn c="university" /><Pun c="(" /><Str c="PUCIT, Punjab University" /><Pun c=")" /></>,
-  <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Pun c="." /><Fn c="cgpa" /><Pun c="(" /><span className="syn-number">{ education.cgpa }</span><Pun c=")" /></>,
-  <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Pun c="." /><Fn c="build" /><Pun c="();" /></>,
-  null,
-  <>&nbsp;&nbsp;&nbsp;&nbsp;<Cmt c="// ── Certifications ───────────────────────────" /></>,
-  <>&nbsp;&nbsp;&nbsp;&nbsp;<Kw c="private final " /><Cls c="List" /><Pun c="<" /><Cls c="Cert" /><Pun c="> " /><span>certs</span><Pun c=" = " /><Cls c="List" /><Pun c="." /><Fn c="of" /><Pun c="(" /></>,
-  ...certifications.map((cert, i) => (
-    <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Kw c="new " /><Cls c="Certification" /><Pun c="(" /><Str c={ cert.name } /><Pun c={i < certifications.length - 1 ? '),' : ')' } /></>
-  )),
-  <>&nbsp;&nbsp;&nbsp;&nbsp;<Pun c=");" /></>,
-  null,
-  <>&nbsp;&nbsp;&nbsp;&nbsp;<Cmt c="// ── Skills ───────────────────────────────────" /></>,
-  <>&nbsp;&nbsp;&nbsp;&nbsp;<Ann c="@Override" /></>,
-  <>&nbsp;&nbsp;&nbsp;&nbsp;<Kw c="public " /><Cls c="SkillSet " /><Fn c="getSkills" /><Pun c="() {" /></>,
-  <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Kw c="return " /><Cls c="SkillSet" /><Pun c="." /><Fn c="builder" /><Pun c="()" /></>,
-  <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Pun c="." /><Fn c="languages" /><Pun c="(" /><Str c="Java, JS, .NET, HTML, CSS" /><Pun c=")" /></>,
-  <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Pun c="." /><Fn c="frameworks" /><Pun c="(" /><Str c="Spring Boot, Vue.js, Quasar, React" /><Pun c=")" /></>,
-  <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Pun c="." /><Fn c="tools" /><Pun c="(" /><Str c="Docker, K8s, AWS, Keycloak, ..." /><Pun c=")" /></>,
-  <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Pun c="." /><Fn c="build" /><Pun c="();" /></>,
-  <>&nbsp;&nbsp;&nbsp;&nbsp;<Pun c="}" /></>,
-  <><Pun c="}" /></>,
+  <L key="0"><Ann>{'@Component'}</Ann></L>,
+  <L key="1"><Kw>{'public class '}</Kw><Cls>{'About '}</Cls><Kw>{'implements '}</Kw><Cls>{'Developer '}</Cls><Pun>{'{'}</Pun></L>,
+  <div key="2" style={ codeLine }> </div>,
+  <L key="3" i="    "><Cmt>{'// ── Education ──────────────────────────────────'}</Cmt></L>,
+  <L key="4" i="    "><Kw>{'private final '}</Kw><Cls>{'Education '}</Cls>{'education'}<Pun>{' = '}</Pun><Cls>{'Education'}</Cls><Pun>{'.'}</Pun><Fn>{'builder'}</Fn><Pun>{'()'}</Pun></L>,
+  <L key="5" i="        "><Pun>{'.'}</Pun><Fn>{'degree'}</Fn><Pun>{'('}</Pun><Str>{ `"${education.degree}"` }</Str><Pun>{')'}</Pun></L>,
+  <L key="6" i="        "><Pun>{'.'}</Pun><Fn>{'university'}</Fn><Pun>{'('}</Pun><Str>{'"PUCIT, Punjab University"'}</Str><Pun>{')'}</Pun></L>,
+  <L key="7" i="        "><Pun>{'.'}</Pun><Fn>{'cgpa'}</Fn><Pun>{'('}</Pun><Num>{ education.cgpa }</Num><Pun>{')'}</Pun></L>,
+  <L key="8" i="        "><Pun>{'.'}</Pun><Fn>{'build'}</Fn><Pun>{'();'}</Pun></L>,
+  <div key="9" style={ codeLine }> </div>,
+  <L key="10" i="    "><Cmt>{'// ── Certifications ──────────────────────────────'}</Cmt></L>,
+  <L key="11" i="    "><Kw>{'private final '}</Kw><Cls>{'List'}</Cls><Pun>{'<'}</Pun><Cls>{'Certification'}</Cls><Pun>{'> '}</Pun>{'certs'}<Pun>{' = '}</Pun><Cls>{'List'}</Cls><Pun>{'.'}</Pun><Fn>{'of'}</Fn><Pun>{'('}</Pun></L>,
+  <L key="12" i="        "><Kw>{'new '}</Kw><Cls>{'Certification'}</Cls><Pun>{'('}</Pun><Str>{'"Cloud Fundamentals"'}</Str><Pun>{', '}</Pun><Str>{'"Coursera"'}</Str><Pun>{'),'}</Pun></L>,
+  <L key="13" i="        "><Kw>{'new '}</Kw><Cls>{'Certification'}</Cls><Pun>{'('}</Pun><Str>{'"Introduction to AWS"'}</Str><Pun>{', '}</Pun><Str>{'"Coursera"'}</Str><Pun>{')'}</Pun></L>,
+  <L key="14" i="    "><Pun>{');'}</Pun></L>,
+  <div key="15" style={ codeLine }> </div>,
+  <L key="16" i="    "><Cmt>{'// ── Skills ──────────────────────────────────────'}</Cmt></L>,
+  <L key="17" i="    "><Ann>{'@Override'}</Ann></L>,
+  <L key="18" i="    "><Kw>{'public '}</Kw><Cls>{'SkillSet '}</Cls><Fn>{'getSkills'}</Fn><Pun>{'() {'}</Pun></L>,
+  <L key="19" i="        "><Kw>{'return '}</Kw><Cls>{'SkillSet'}</Cls><Pun>{'.'}</Pun><Fn>{'builder'}</Fn><Pun>{'()'}</Pun></L>,
+  <L key="20" i="            "><Pun>{'.'}</Pun><Fn>{'languages'}</Fn><Pun>{'('}</Pun><Str>{'"Java, JS, .NET, HTML, CSS"'}</Str><Pun>{')'}</Pun></L>,
+  <L key="21" i="            "><Pun>{'.'}</Pun><Fn>{'frameworks'}</Fn><Pun>{'('}</Pun><Str>{'"Spring Boot, Vue.js, Quasar, React"'}</Str><Pun>{')'}</Pun></L>,
+  <L key="22" i="            "><Pun>{'.'}</Pun><Fn>{'tools'}</Fn><Pun>{'('}</Pun><Str>{'"Docker, K8s, AWS, Keycloak, ..."'}</Str><Pun>{')'}</Pun></L>,
+  <L key="23" i="            "><Pun>{'.'}</Pun><Fn>{'build'}</Fn><Pun>{'();'}</Pun></L>,
+  <L key="24" i="    "><Pun>{'}'}</Pun></L>,
+  <L key="25"><Pun>{'}'}</Pun></L>,
 ];
 
 const st = {
   wrapper: {
-    display   : 'flex',
-    height    : '100%',
-    overflow  : 'hidden',
+    display  : 'flex',
+    height   : '100%',
+    overflow : 'hidden',
   },
   codePanel: {
     display  : 'flex',
@@ -57,22 +69,16 @@ const st = {
     flex      : '1',
     padding   : '20px 0 20px 18px',
     overflowY : 'auto',
+    overflowX : 'auto',
     lineHeight: '22px',
   },
-  codeLine: {
-    minHeight : '22px',
-    fontSize  : '13px',
-    display   : 'flex',
-    alignItems: 'baseline',
-    flexWrap  : 'wrap',
-  },
   rightPanel: {
-    width         : '340px',
-    flexShrink    : '0',
-    background    : '#000000',
-    borderLeft    : '1px solid #1e1e1e',
-    overflowY     : 'auto',
-    padding       : '20px',
+    width      : '340px',
+    flexShrink : '0',
+    background : '#000000',
+    borderLeft : '1px solid #1e1e1e',
+    overflowY  : 'auto',
+    padding    : '20px',
   },
   sectionLabel: {
     fontSize      : '10px',
@@ -85,73 +91,31 @@ const st = {
     paddingBottom : '6px',
     borderBottom  : '1px solid #1e1e1e',
   },
-  educBox: {
-    marginBottom : '20px',
+  educBox    : { marginBottom: '20px' },
+  educDegree : { fontSize: '13px', fontWeight: '700', color: '#fe8019', fontFamily: 'Inter, sans-serif' },
+  educUniv   : { fontSize: '12px', color: '#a0a0a0', fontFamily: 'Inter, sans-serif', marginTop: '3px' },
+  educCgpa   : { fontSize: '11px', color: '#b8bb26', fontFamily: 'Inter, sans-serif', marginTop: '2px' },
+  certBox    : { marginBottom: '20px' },
+  certItem   : { marginBottom: '10px' },
+  certName   : { fontSize: '12px', color: '#fe8019', fontFamily: 'Inter, sans-serif' },
+  certLink   : {
+    fontSize: '10px', color: '#4e9cf5', fontFamily: 'Inter, sans-serif',
+    textDecoration: 'none', display: 'block', marginTop: '2px',
   },
-  educDegree: {
-    fontSize   : '13px',
-    fontWeight : '700',
-    color      : '#fe8019',
-    fontFamily : 'Inter, sans-serif',
-  },
-  educUniv: {
-    fontSize   : '12px',
-    color      : '#a0a0a0',
-    fontFamily : 'Inter, sans-serif',
-    marginTop  : '3px',
-  },
-  educCgpa: {
-    fontSize   : '11px',
-    color      : '#b8bb26',
-    fontFamily : 'Inter, sans-serif',
-    marginTop  : '2px',
-  },
-  certBox: {
-    marginBottom : '20px',
-  },
-  certItem: {
-    marginBottom : '10px',
-  },
-  certName: {
-    fontSize   : '12px',
-    color      : '#fe8019',
-    fontFamily : 'Inter, sans-serif',
-  },
-  certLink: {
-    fontSize      : '10px',
-    color         : '#4e9cf5',
-    fontFamily    : 'Inter, sans-serif',
-    textDecoration: 'none',
-    display       : 'block',
-    marginTop     : '2px',
-  },
-  skillGrid: {
-    display               : 'grid',
-    gridTemplateColumns   : 'repeat(3, 1fr)',
-    gap                   : '8px',
-    marginBottom          : '18px',
+  skillGrid : {
+    display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px', marginBottom: '18px',
   },
 };
 
 export default function About() {
   return (
     <div style={ st.wrapper } className="fade-in">
-      { /* Left: code */ }
       <div style={ st.codePanel }>
         <LineNumbers count={ CODE_LINES.length + 5 } />
-        <div style={ st.codeArea }>
-          { CODE_LINES.map((line, i) => (
-            <div key={ i } style={ st.codeLine }>
-              { line ?? <>&nbsp;</> }
-            </div>
-          )) }
-        </div>
+        <div style={ st.codeArea }>{ CODE_LINES }</div>
       </div>
 
-      { /* Right: panel */ }
       <div style={ st.rightPanel }>
-
-        { /* Education */ }
         <div style={ st.sectionLabel }>Education</div>
         <div style={ st.educBox }>
           <div style={ st.educDegree }>{ education.degree }</div>
@@ -159,25 +123,18 @@ export default function About() {
           <div style={ st.educCgpa }>CGPA: { education.cgpa }</div>
         </div>
 
-        { /* Certifications */ }
         <div style={ st.sectionLabel }>Certifications</div>
         <div style={ st.certBox }>
           { certifications.map(cert => (
             <div key={ cert.id } style={ st.certItem }>
               <div style={ st.certName }>{ cert.icon } { cert.name }</div>
-              <a
-                href={ cert.link }
-                target="_blank"
-                rel="noopener noreferrer"
-                style={ st.certLink }
-              >
+              <a href={ cert.link } target="_blank" rel="noopener noreferrer" style={ st.certLink }>
                 { cert.issuer } Certificate ↗
               </a>
             </div>
           )) }
         </div>
 
-        { /* Languages */ }
         <div style={ st.sectionLabel }>Programming Languages</div>
         <div style={ st.skillGrid }>
           { skills.languages.map(s => (
@@ -185,7 +142,6 @@ export default function About() {
           )) }
         </div>
 
-        { /* Frameworks */ }
         <div style={ st.sectionLabel }>Frameworks &amp; Libraries</div>
         <div style={ st.skillGrid }>
           { skills.frameworks.map(s => (
@@ -193,14 +149,12 @@ export default function About() {
           )) }
         </div>
 
-        { /* Tools */ }
         <div style={ st.sectionLabel }>Tools &amp; DevOps</div>
         <div style={ st.skillGrid }>
           { skills.tools.map(s => (
             <SkillCard key={ s.id } icon={ s.icon } imgSrc={ s.imgSrc } name={ s.name } />
           )) }
         </div>
-
       </div>
     </div>
   );

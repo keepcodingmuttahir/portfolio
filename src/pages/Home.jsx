@@ -2,73 +2,77 @@ import React from 'react';
 import LineNumbers from '../components/LineNumbers.jsx';
 import { personalInfo } from '../data/portfolio.js';
 
-// ── Shared token spans ─────────────────────────────────────────
-const Kw   = ({ children }) => <span className="syn-keyword">{ children }</span>;
-const Cls  = ({ children }) => <span className="syn-class">{ children }</span>;
-const Str  = ({ children }) => <span className="syn-string">"{ children }"</span>;
-const Ann  = ({ children }) => <span className="syn-annotation">{ children }</span>;
-const Fn   = ({ children }) => <span className="syn-function">{ children }</span>;
-const Cmt  = ({ children }) => <span className="syn-comment">{ children }</span>;
-const Num  = ({ children }) => <span className="syn-number">{ children }</span>;
-const Pun  = ({ children }) => <span className="syn-punct">{ children }</span>;
+// ── Syntax token components ────────────────────────────────────
+const Kw  = ({ children }) => <span className="syn-keyword">{ children }</span>;
+const Cls = ({ children }) => <span className="syn-class">{ children }</span>;
+const Str = ({ children }) => <span className="syn-string">{ children }</span>;
+const Ann = ({ children }) => <span className="syn-annotation">{ children }</span>;
+const Fn  = ({ children }) => <span className="syn-function">{ children }</span>;
+const Cmt = ({ children }) => <span className="syn-comment">{ children }</span>;
+const Pun = ({ children }) => <span className="syn-punct">{ children }</span>;
 
-// Each line of the fake Java code
+const codeLine = {
+  minHeight  : '22px',
+  display    : 'block',
+  lineHeight : '22px',
+  fontSize   : '13px',
+  whiteSpace : 'pre',
+};
+
+const L = ({ i = '', children }) => (
+  <div style={ codeLine }>{ i }{ children }</div>
+);
+
 const CODE_LINES = [
-  <><Ann>@SpringBootApplication</Ann></>,
-  <><Kw>public class </Kw><Cls>MuttahirIslam </Cls><Pun>{'{'}</Pun></>,
-  null,
-  <>&nbsp;&nbsp;&nbsp;&nbsp;<Ann>@Value</Ann><Pun>(</Pun><Str>name</Str><Pun>)</Pun></>,
-  <>&nbsp;&nbsp;&nbsp;&nbsp;<Kw>private </Kw><Cls>String </Cls><span>name </span><Pun>= </Pun><Str>Muttahir Islam</Str><Pun>;</Pun></>,
-  null,
-  <>&nbsp;&nbsp;&nbsp;&nbsp;<Ann>@Value</Ann><Pun>(</Pun><Str>role</Str><Pun>)</Pun></>,
-  <>&nbsp;&nbsp;&nbsp;&nbsp;<Kw>private </Kw><Cls>String </Cls><span>role </span><Pun>= </Pun><Str>Software Engineer</Str><Pun>;</Pun></>,
-  null,
-  <>&nbsp;&nbsp;&nbsp;&nbsp;<Ann>@Value</Ann><Pun>(</Pun><Str>specialization</Str><Pun>)</Pun></>,
-  <>&nbsp;&nbsp;&nbsp;&nbsp;<Kw>private </Kw><Cls>List</Cls><Pun>&lt;</Pun><Cls>String</Cls><Pun>&gt; </Pun><span>stack </span><Pun>= </Pun><Cls>List</Cls><Pun>.</Pun><Fn>of</Fn><Pun>(</Pun></>,
-  <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Str>Spring Boot</Str><Pun>, </Pun><Str>Java</Str><Pun>, </Pun><Str>Vue.js</Str><Pun>,</Pun></>,
-  <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Str>Quasar</Str><Pun>, </Pun><Str>React</Str><Pun>, </Pun><Str>AI Integrations</Str></>,
-  <>&nbsp;&nbsp;&nbsp;&nbsp;<Pun>);</Pun></>,
-  null,
-  <>&nbsp;&nbsp;&nbsp;&nbsp;<Ann>@Bean</Ann></>,
-  <>&nbsp;&nbsp;&nbsp;&nbsp;<Kw>public </Kw><Cls>String </Cls><Fn>bio</Fn><Pun>() {'{'}</Pun></>,
-  <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Kw>return </Kw><Str>Building enterprise-grade cloud-friendly</Str></>,
-  <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Pun>+ </Pun><Str>software with 20+ production-ready features</Str></>,
-  <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Pun>+ </Pun><Str>in compliance with security &amp; privacy standards.</Str><Pun>;</Pun></>,
-  <>&nbsp;&nbsp;&nbsp;&nbsp;<Pun>{'}'}</Pun></>,
-  null,
-  <>&nbsp;&nbsp;&nbsp;&nbsp;<Kw>public static void </Kw><Fn>main</Fn><Pun>(</Pun><Cls>String</Cls><Pun>[] </Pun><span>args</span><Pun>) {'{'}</Pun></>,
-  <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Cls>SpringApplication</Cls><Pun>.</Pun><Fn>run</Fn><Pun>(</Pun><Cls>MuttahirIslam</Cls><Pun>.</Pun><Kw>class</Kw><Pun>, </Pun><span>args</span><Pun>);</Pun></>,
-  <>&nbsp;&nbsp;&nbsp;&nbsp;<Pun>{'}'}</Pun></>,
-  <><Pun>{'}'}</Pun></>,
-  null,
-  <><Cmt>// 🚀  Server started on port 8080</Cmt></>,
-  <><Cmt>// ✅  All beans initialized successfully</Cmt></>,
-  <><Cmt>// 💼  Ready to accept new opportunities</Cmt></>,
+  <L key="0"><Ann>{'@SpringBootApplication'}</Ann></L>,
+  <L key="1"><Kw>{'public class '}</Kw><Cls>{'MuttahirIslam '}</Cls><Pun>{'{'}</Pun></L>,
+  <div key="2" style={ codeLine }> </div>,
+  <L key="3" i="    "><Ann>{'@Value'}</Ann><Pun>{'('}</Pun><Str>{'"name"'}</Str><Pun>{')'}</Pun></L>,
+  <L key="4" i="    "><Kw>{'private '}</Kw><Cls>{'String '}</Cls>{'name '}<Pun>{'= '}</Pun><Str>{'"Muttahir Islam"'}</Str><Pun>{';'}</Pun></L>,
+  <div key="5" style={ codeLine }> </div>,
+  <L key="6" i="    "><Ann>{'@Value'}</Ann><Pun>{'('}</Pun><Str>{'"role"'}</Str><Pun>{')'}</Pun></L>,
+  <L key="7" i="    "><Kw>{'private '}</Kw><Cls>{'String '}</Cls>{'role '}<Pun>{'= '}</Pun><Str>{'"Software Engineer"'}</Str><Pun>{';'}</Pun></L>,
+  <div key="8" style={ codeLine }> </div>,
+  <L key="9" i="    "><Ann>{'@Value'}</Ann><Pun>{'('}</Pun><Str>{'"specialization"'}</Str><Pun>{')'}</Pun></L>,
+  <L key="10" i="    "><Kw>{'private '}</Kw><Cls>{'List'}</Cls><Pun>{'<'}</Pun><Cls>{'String'}</Cls><Pun>{'> '}</Pun>{'stack '}<Pun>{'= '}</Pun><Cls>{'List'}</Cls><Pun>{'.'}</Pun><Fn>{'of'}</Fn><Pun>{'('}</Pun></L>,
+  <L key="11" i="        "><Str>{'"Spring Boot"'}</Str><Pun>{', '}</Pun><Str>{'"Java"'}</Str><Pun>{', '}</Pun><Str>{'"Vue.js"'}</Str><Pun>{','}</Pun></L>,
+  <L key="12" i="        "><Str>{'"Quasar"'}</Str><Pun>{', '}</Pun><Str>{'"React"'}</Str><Pun>{', '}</Pun><Str>{'"AI Integrations"'}</Str></L>,
+  <L key="13" i="    "><Pun>{');'}</Pun></L>,
+  <div key="14" style={ codeLine }> </div>,
+  <L key="15" i="    "><Ann>{'@Bean'}</Ann></L>,
+  <L key="16" i="    "><Kw>{'public '}</Kw><Cls>{'String '}</Cls><Fn>{'bio'}</Fn><Pun>{'() {'}</Pun></L>,
+  <L key="17" i="        "><Kw>{'return '}</Kw><Str>{'"Building enterprise-grade cloud-friendly"'}</Str></L>,
+  <L key="18" i="               "><Pun>{'+ '}</Pun><Str>{'"software with 20+ production-ready features"'}</Str></L>,
+  <L key="19" i="               "><Pun>{'+ '}</Pun><Str>{'"in compliance with security & privacy standards."'}</Str><Pun>{';'}</Pun></L>,
+  <L key="20" i="    "><Pun>{'}'}</Pun></L>,
+  <div key="21" style={ codeLine }> </div>,
+  <L key="22" i="    "><Kw>{'public static void '}</Kw><Fn>{'main'}</Fn><Pun>{'('}</Pun><Cls>{'String'}</Cls><Pun>{'[] '}</Pun>{'args'}<Pun>{') {'}</Pun></L>,
+  <L key="23" i="        "><Cls>{'SpringApplication'}</Cls><Pun>{'.'}</Pun><Fn>{'run'}</Fn><Pun>{'('}</Pun><Cls>{'MuttahirIslam'}</Cls><Pun>{'.'}</Pun><Kw>{'class'}</Kw><Pun>{', '}</Pun>{'args'}<Pun>{');'}</Pun></L>,
+  <L key="24" i="    "><Pun>{'}'}</Pun></L>,
+  <L key="25"><Pun>{'}'}</Pun></L>,
+  <div key="26" style={ codeLine }> </div>,
+  <L key="27"><Cmt>{'// 🚀  Server started on port 8080'}</Cmt></L>,
+  <L key="28"><Cmt>{'// ✅  All beans initialized successfully'}</Cmt></L>,
+  <L key="29"><Cmt>{'// 💼  Ready to accept new opportunities'}</Cmt></L>,
 ];
 
-const styles = {
+const st = {
   split: {
-    display   : 'flex',
-    height    : '100%',
-    overflow  : 'hidden',
+    display  : 'flex',
+    height   : '100%',
+    overflow : 'hidden',
   },
   codePanel: {
-    display   : 'flex',
-    flex      : '1',
-    overflow  : 'hidden',
+    display  : 'flex',
+    flex     : '1',
+    overflow : 'hidden',
   },
   codeArea: {
-    flex       : '1',
-    padding    : '20px 0 20px 18px',
-    overflowY  : 'auto',
-    lineHeight : '22px',
-  },
-  codeLine: {
-    minHeight  : '22px',
-    display    : 'flex',
-    alignItems : 'baseline',
-    flexWrap   : 'wrap',
-    fontSize   : '13px',
+    flex      : '1',
+    padding   : '20px 0 20px 18px',
+    overflowY : 'auto',
+    overflowX : 'auto',
+    lineHeight: '22px',
   },
   rightPanel: {
     width           : '360px',
@@ -88,7 +92,7 @@ const styles = {
     borderRadius : '50%',
     objectFit    : 'cover',
     border       : '2px solid #fe8019',
-    boxShadow    : '0 0 30px rgba(254, 128, 25, 0.2)',
+    boxShadow    : '0 0 30px rgba(254,128,25,0.2)',
   },
   photoFallback: {
     width           : '110px',
@@ -109,9 +113,7 @@ const styles = {
     lineHeight : '1.2',
     fontFamily : 'Inter, sans-serif',
   },
-  nameAccent: {
-    color : '#fe8019',
-  },
+  nameAccent : { color: '#fe8019' },
   role: {
     fontSize      : '12px',
     color         : '#a0a0a0',
@@ -134,95 +136,87 @@ const styles = {
     justifyContent : 'center',
   },
   btnPrimary: {
-    padding         : '8px 20px',
-    borderRadius    : '5px',
-    fontSize        : '12px',
-    fontWeight      : '600',
-    cursor          : 'pointer',
-    border          : 'none',
-    fontFamily      : 'Inter, sans-serif',
-    background      : '#fe8019',
-    color           : '#000000',
-    transition      : 'all 0.2s ease',
-    textDecoration  : 'none',
-    display         : 'inline-flex',
-    alignItems      : 'center',
-    gap             : '5px',
+    padding        : '8px 20px',
+    borderRadius   : '5px',
+    fontSize       : '12px',
+    fontWeight     : '600',
+    cursor         : 'pointer',
+    border         : 'none',
+    fontFamily     : 'Inter, sans-serif',
+    background     : '#fe8019',
+    color          : '#000000',
+    transition     : 'all 0.2s ease',
+    textDecoration : 'none',
+    display        : 'inline-flex',
+    alignItems     : 'center',
+    gap            : '5px',
   },
   btnGhost: {
-    padding         : '8px 20px',
-    borderRadius    : '5px',
-    fontSize        : '12px',
-    fontWeight      : '600',
-    cursor          : 'pointer',
-    fontFamily      : 'Inter, sans-serif',
-    background      : 'transparent',
-    color           : '#a0a0a0',
-    border          : '1px solid #2a2a2a',
-    transition      : 'all 0.2s ease',
-    textDecoration  : 'none',
-    display         : 'inline-flex',
-    alignItems      : 'center',
-    gap             : '5px',
+    padding        : '8px 20px',
+    borderRadius   : '5px',
+    fontSize       : '12px',
+    fontWeight     : '600',
+    cursor         : 'pointer',
+    fontFamily     : 'Inter, sans-serif',
+    background     : 'transparent',
+    color          : '#a0a0a0',
+    border         : '1px solid #2a2a2a',
+    transition     : 'all 0.2s ease',
+    textDecoration : 'none',
+    display        : 'inline-flex',
+    alignItems     : 'center',
+    gap            : '5px',
   },
 };
 
-export default function Home({ onTabChange }) {
+export default function Home({ onTabChange, onContactOpen }) {
   const [imgError, setImgError] = React.useState(false);
 
   return (
-    <div style={ styles.split } className="fade-in">
-      { /* Left: code panel */ }
-      <div style={ styles.codePanel }>
+    <div style={ st.split } className="fade-in">
+      <div style={ st.codePanel }>
         <LineNumbers count={ CODE_LINES.length + 5 } />
-        <div style={ styles.codeArea }>
-          { CODE_LINES.map((line, i) => (
-            <div key={ i } style={ styles.codeLine }>
-              { line ?? <>&nbsp;</> }
-            </div>
-          )) }
-        </div>
+        <div style={ st.codeArea }>{ CODE_LINES }</div>
       </div>
 
-      { /* Right: hero panel */ }
-      <div style={ styles.rightPanel }>
+      <div style={ st.rightPanel }>
         { imgError
-          ? <div style={ styles.photoFallback }>👤</div>
+          ? <div style={ st.photoFallback }>👤</div>
           : (
             <img
               src={ personalInfo.photo }
               alt={ personalInfo.name }
-              style={ styles.photo }
+              style={ st.photo }
               onError={ () => setImgError(true) }
             />
           )
         }
 
-        <div style={ styles.name }>
-          { personalInfo.firstName }{' '}
-          <span style={ styles.nameAccent }>{ personalInfo.lastName }</span>
+        <div style={ st.name }>
+          { personalInfo.firstName }{ ' ' }
+          <span style={ st.nameAccent }>{ personalInfo.lastName }</span>
         </div>
 
-        <div style={ styles.role }>☕ { personalInfo.role }</div>
+        <div style={ st.role }>☕ { personalInfo.role }</div>
 
-        <div style={ styles.bio }>
+        <div style={ st.bio }>
           Specializing in Java, Spring Boot, Vue.js, Quasar, React &amp; AI integrations.
           Building enterprise-level cloud-friendly software with 20+ production-ready features.
         </div>
 
-        <div style={ styles.btnRow }>
+        <div style={ st.btnRow }>
           <button
-            style={ styles.btnPrimary }
+            style={ st.btnPrimary }
             onClick={ () => onTabChange('projects') }
           >
             View Projects →
           </button>
-          <a
-            href={ `mailto:${ personalInfo.email }` }
-            style={ styles.btnGhost }
+          <button
+            style={ st.btnGhost }
+            onClick={ onContactOpen }
           >
             Hire Me ✉
-          </a>
+          </button>
         </div>
       </div>
     </div>
