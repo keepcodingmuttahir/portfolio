@@ -78,7 +78,7 @@ const st = {
   rightPanel: {
     width      : '380px',
     flexShrink : '0',
-    background : '#000000',
+    background : 'rgba(0,0,0,0.6)',
     borderLeft : '1px solid #1e1e1e',
     overflowY  : 'auto',
     padding    : '20px',

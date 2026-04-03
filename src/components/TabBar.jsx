@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export const TABS = [
   { id: 'home',       label: 'Home.java',      icon: '☕', iconColor: '#b07219' },
@@ -11,7 +11,7 @@ export const TABS = [
 const styles = {
   tabBar: {
     height      : '36px',
-    background  : '#0d0d0d',
+    background  : 'rgba(13,13,13,0.95)',
     borderBottom: '1px solid #1e1e1e',
     display     : 'flex',
     alignItems  : 'flex-end',
@@ -20,7 +20,7 @@ const styles = {
     overflowX   : 'auto',
     flexShrink  : '0',
   },
-  tab: (active) => ({
+  tab: (active, hovered) => ({
     height          : '32px',
     padding         : '0 14px',
     display         : 'flex',
@@ -30,27 +30,34 @@ const styles = {
     borderRadius    : '6px 6px 0 0',
     fontSize        : '12px',
     fontFamily      : 'Inter, sans-serif',
-    color           : active ? '#e8e8e8' : '#666666',
-    background      : active ? '#111111' : '#0a0a0a',
+    color           : active ? '#e8e8e8' : hovered ? '#a0a0a0' : '#555555',
+    background      : active ? 'rgba(17,17,17,0.98)' : hovered ? 'rgba(26,26,26,0.7)' : 'rgba(10,10,10,0.6)',
     border          : `1px solid ${ active ? '#2a2a2a' : 'transparent' }`,
     borderBottom    : active ? '2px solid #fe8019' : '1px solid transparent',
-    transition      : 'all 0.12s ease',
+    transition      : 'color 0.15s ease, background 0.15s ease',
     whiteSpace      : 'nowrap',
     flexShrink      : '0',
     userSelect      : 'none',
+    position        : 'relative',
+    // glow handled via boxShadow animation on active
+    animation       : active ? 'tabGlow 2.5s ease-in-out infinite' : 'none',
   }),
 };
 
 export default function TabBar({ activeTab, onTabChange }) {
+  const [hovered, setHovered] = useState(null);
+
   return (
     <div style={ styles.tabBar }>
       { TABS.map(tab => (
         <div
           key={ tab.id }
-          style={ styles.tab(tab.id === activeTab) }
+          style={ styles.tab(tab.id === activeTab, hovered === tab.id) }
           onClick={ () => onTabChange(tab.id) }
+          onMouseEnter={ () => setHovered(tab.id) }
+          onMouseLeave={ () => setHovered(null) }
         >
-          <span style={ { color: tab.iconColor } }>{ tab.icon }</span>
+          <span style={ { color: tab.iconColor, fontSize: '11px' } }>{ tab.icon }</span>
           <span>{ tab.label }</span>
         </div>
       )) }

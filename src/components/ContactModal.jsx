@@ -321,7 +321,7 @@ export default function ContactModal({ open, onClose }) {
         from_email  : form.email.trim(),
         subject     : form.subject.trim() || `New message from ${ form.name.trim() }`,
         message     : form.message.trim(),
-        to_email    : personalInfo.email,
+        to_email    : 'muttahirislam111.mi@gmail.com',
         reply_to    : form.email.trim(),
       };
 

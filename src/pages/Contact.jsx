@@ -73,14 +73,14 @@ const st = {
     marginTop  : '-12px',
   },
   codeBox: {
-    background   : '#0a0a0a',
+    background   : 'rgba(8,8,8,0.75)',
     border       : '1px solid #2a2a2a',
     borderRadius : '8px',
     width        : '100%',
     overflow     : 'hidden',
   },
   codeBoxHeader: {
-    background   : '#000000',
+    background   : 'rgba(0,0,0,0.7)',
     borderBottom : '1px solid #1e1e1e',
     padding      : '8px 16px',
     display      : 'flex',

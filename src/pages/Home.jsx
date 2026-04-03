@@ -54,6 +54,7 @@ const CODE_LINES = [
   <L key="27"><Cmt>{'// 🚀  Server started on port 8080'}</Cmt></L>,
   <L key="28"><Cmt>{'// ✅  All beans initialized successfully'}</Cmt></L>,
   <L key="29"><Cmt>{'// 💼  Ready to accept new opportunities'}</Cmt></L>,
+  <div key="30" style={ codeLine }><span className="cursor-blink" /></div>,
 ];
 
 const st = {
@@ -77,7 +78,7 @@ const st = {
   rightPanel: {
     width           : '360px',
     flexShrink      : '0',
-    background      : '#000000',
+    background      : 'rgba(0,0,0,0.6)',
     borderLeft      : '1px solid #1e1e1e',
     display         : 'flex',
     flexDirection   : 'column',
