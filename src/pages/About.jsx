@@ -29,20 +29,17 @@ const CODE_LINES = [
   <L key="0"><Ann>{'@Component'}</Ann></L>,
   <L key="1"><Kw>{'public class '}</Kw><Cls>{'About '}</Cls><Kw>{'implements '}</Kw><Cls>{'Developer '}</Cls><Pun>{'{'}</Pun></L>,
   <div key="2" style={ codeLine }> </div>,
-  <L key="3" i="    "><Cmt>{'// ── Education ──────────────────────────────────'}</Cmt></L>,
   <L key="4" i="    "><Kw>{'private final '}</Kw><Cls>{'Education '}</Cls>{'education'}<Pun>{' = '}</Pun><Cls>{'Education'}</Cls><Pun>{'.'}</Pun><Fn>{'builder'}</Fn><Pun>{'()'}</Pun></L>,
   <L key="5" i="        "><Pun>{'.'}</Pun><Fn>{'degree'}</Fn><Pun>{'('}</Pun><Str>{ `"${education.degree}"` }</Str><Pun>{')'}</Pun></L>,
   <L key="6" i="        "><Pun>{'.'}</Pun><Fn>{'university'}</Fn><Pun>{'('}</Pun><Str>{'"PUCIT, Punjab University"'}</Str><Pun>{')'}</Pun></L>,
   <L key="7" i="        "><Pun>{'.'}</Pun><Fn>{'cgpa'}</Fn><Pun>{'('}</Pun><Num>{ education.cgpa }</Num><Pun>{')'}</Pun></L>,
   <L key="8" i="        "><Pun>{'.'}</Pun><Fn>{'build'}</Fn><Pun>{'();'}</Pun></L>,
   <div key="9" style={ codeLine }> </div>,
-  <L key="10" i="    "><Cmt>{'// ── Certifications ──────────────────────────────'}</Cmt></L>,
   <L key="11" i="    "><Kw>{'private final '}</Kw><Cls>{'List'}</Cls><Pun>{'<'}</Pun><Cls>{'Certification'}</Cls><Pun>{'> '}</Pun>{'certs'}<Pun>{' = '}</Pun><Cls>{'List'}</Cls><Pun>{'.'}</Pun><Fn>{'of'}</Fn><Pun>{'('}</Pun></L>,
   <L key="12" i="        "><Kw>{'new '}</Kw><Cls>{'Certification'}</Cls><Pun>{'('}</Pun><Str>{'"Cloud Fundamentals"'}</Str><Pun>{', '}</Pun><Str>{'"Coursera"'}</Str><Pun>{'),'}</Pun></L>,
   <L key="13" i="        "><Kw>{'new '}</Kw><Cls>{'Certification'}</Cls><Pun>{'('}</Pun><Str>{'"Introduction to AWS"'}</Str><Pun>{', '}</Pun><Str>{'"Coursera"'}</Str><Pun>{')'}</Pun></L>,
   <L key="14" i="    "><Pun>{');'}</Pun></L>,
   <div key="15" style={ codeLine }> </div>,
-  <L key="16" i="    "><Cmt>{'// ── Skills ──────────────────────────────────────'}</Cmt></L>,
   <L key="17" i="    "><Ann>{'@Override'}</Ann></L>,
   <L key="18" i="    "><Kw>{'public '}</Kw><Cls>{'SkillSet '}</Cls><Fn>{'getSkills'}</Fn><Pun>{'() {'}</Pun></L>,
   <L key="19" i="        "><Kw>{'return '}</Kw><Cls>{'SkillSet'}</Cls><Pun>{'.'}</Pun><Fn>{'builder'}</Fn><Pun>{'()'}</Pun></L>,
@@ -52,6 +49,7 @@ const CODE_LINES = [
   <L key="23" i="            "><Pun>{'.'}</Pun><Fn>{'build'}</Fn><Pun>{'();'}</Pun></L>,
   <L key="24" i="    "><Pun>{'}'}</Pun></L>,
   <L key="25"><Pun>{'}'}</Pun></L>,
+    <div key="30" style={ codeLine }><span className="cursor-blink" /></div>,
 ];
 
 const st = {
@@ -138,21 +136,21 @@ export default function About() {
         <div style={ st.sectionLabel }>Programming Languages</div>
         <div style={ st.skillGrid }>
           { skills.languages.map(s => (
-            <SkillCard key={ s.id } icon={ s.icon } imgSrc={ s.imgSrc } name={ s.name } />
+            <SkillCard key={ s.id } imgSrc={ s.icon } name={ s.name } />
           )) }
         </div>
 
         <div style={ st.sectionLabel }>Frameworks &amp; Libraries</div>
         <div style={ st.skillGrid }>
           { skills.frameworks.map(s => (
-            <SkillCard key={ s.id } icon={ s.icon } imgSrc={ s.imgSrc } name={ s.name } />
+            <SkillCard key={ s.id } imgSrc={ s.icon } name={ s.name } />
           )) }
         </div>
 
         <div style={ st.sectionLabel }>Tools &amp; DevOps</div>
         <div style={ st.skillGrid }>
           { skills.tools.map(s => (
-            <SkillCard key={ s.id } icon={ s.icon } imgSrc={ s.imgSrc } name={ s.name } />
+            <SkillCard key={ s.id } imgSrc={ s.icon } name={ s.name } />
           )) }
         </div>
       </div>

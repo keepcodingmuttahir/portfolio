@@ -21,21 +21,17 @@ const L = ({ i = '', children }) => (
 );
 
 const CODE_LINES = [
-  <L key="0"><Cmt>{'# contact.yaml — Muttahir Islam'}</Cmt></L>,
-  <L key="1"><Cmt>{'# Reach out via any of the channels below'}</Cmt></L>,
-  <div key="2" style={ codeLine }> </div>,
   <L key="3"><Tag>{'socials'}</Tag><Pun>{':'}</Pun></L>,
-  <L key="4" i="  "><Key>{'email'}</Key><Pun>{'    : '}</Pun><Val>{ personalInfo.email }</Val></L>,
-  <L key="5" i="  "><Key>{'github'}</Key><Pun>{'   : '}</Pun><Val>{ personalInfo.github }</Val></L>,
-  <L key="6" i="  "><Key>{'linkedin'}</Key><Pun>{' : '}</Pun><Val>{ personalInfo.linkedin }</Val></L>,
-  <L key="7" i="  "><Key>{'location'}</Key><Pun>{' : '}</Pun><Val>{ personalInfo.location }</Val></L>,
-  <div key="8" style={ codeLine }> </div>,
-  <L key="9"><Tag>{'status'}</Tag><Pun>{':'}</Pun></L>,
-  <L key="10" i="  "><Key>{'available'}</Key><Pun>{' : '}</Pun><Bool>{ String(personalInfo.available) }</Bool></L>,
-  <L key="11" i="  "><Key>{'openTo'}</Key><Pun>{'    : '}</Pun><Val>{'Full-time, Freelance, Remote'}</Val></L>,
-  <div key="12" style={ codeLine }> </div>,
-  <L key="13"><Cmt>{'# Response time: within 24 hours'}</Cmt></L>,
-  <L key="14"><Cmt>{'# Best way to reach me: email or LinkedIn'}</Cmt></L>,
+  <L key="4" i="  "><Key>{'phone'}</Key><Pun>{'    : '}</Pun><Val>{ personalInfo.phone }</Val></L>,
+  <L key="5" i="  "><Key>{'email'}</Key><Pun>{'    : '}</Pun><Val>{ personalInfo.email }</Val></L>,
+  <L key="6" i="  "><Key>{'github'}</Key><Pun>{'   : '}</Pun><Val>{ personalInfo.github }</Val></L>,
+  <L key="7" i="  "><Key>{'linkedin'}</Key><Pun>{' : '}</Pun><Val>{ personalInfo.linkedin }</Val></L>,
+  <L key="8" i="  "><Key>{'location'}</Key><Pun>{' : '}</Pun><Val>{ personalInfo.location }</Val></L>,
+  <div key="9" style={ codeLine }> </div>,
+  <L key="10"><Tag>{'status'}</Tag><Pun>{':'}</Pun></L>,
+  <L key="11" i="  "><Key>{'available'}</Key><Pun>{' : '}</Pun><Bool>{ String(personalInfo.available) }</Bool></L>,
+  <L key="12" i="  "><Key>{'openTo'}</Key><Pun>{'    : '}</Pun><Val>{'Full-time, Part-time, Remote'}</Val></L>,
+  <div key="13" style={ codeLine }> </div>
 ];
 
 const st = {

@@ -34,8 +34,6 @@ function renderBullet(text) {
 
 const buildLines = () => {
   const lines = [
-    <L key="c0"><Cmt>{'// Experience.kt — Muttahir Islam'}</Cmt></L>,
-    <div key="e0" style={ codeLine }> </div>,
     <L key="dc"><Kw>{'data class '}</Kw><Cls>{'Experience'}</Cls><Pun>{'('}</Pun></L>,
     <L key="d1" i="    "><Kw>{'val '}</Kw>{'company'}<Pun>{': '}</Pun><Cls>{'String'}</Cls><Pun>{','}</Pun></L>,
     <L key="d2" i="    "><Kw>{'val '}</Kw>{'role'}<Pun>{'    : '}</Pun><Cls>{'String'}</Cls><Pun>{','}</Pun></L>,
@@ -72,6 +70,7 @@ const buildLines = () => {
   });
 
   lines.push( <L key="lc"><Pun>{')'}</Pun></L> );
+  lines.push(  <div key="30" style={ codeLine }><span className="cursor-blink" /></div>);
   return lines;
 };
 

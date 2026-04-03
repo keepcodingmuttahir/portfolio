@@ -9,10 +9,11 @@ export const personalInfo = {
   firstName : 'Muttahir',
   lastName  : 'Islam',
   role      : 'Software Engineer',
+  phone     : '+1 (216) 408 3651',
   email     : 'hire@muttahirislam.dev',
   github    : 'https://github.com/keepcodingmuttahir',
   linkedin  : 'https://linkedin.com/in/muttahirislam',
-  location  : 'Lahore, Pakistan',
+  location  : 'Ohio, United States.',
   available : true,
 
   // GitHub avatar is used automatically.
@@ -56,34 +57,41 @@ export const certifications = [
 // icon: use an emoji, or set imgSrc: '/images/skill-icon.png' instead.
 export const skills = {
   languages: [
-    { id: 'java',       name: 'Java',       icon: '☕' },
-    { id: 'js',         name: 'JavaScript', icon: '🟨' },
-    { id: 'dotnet',     name: '.NET',       icon: '🔷' },
-    { id: 'html',       name: 'HTML',       icon: '🌐' },
-    { id: 'css',        name: 'CSS',        icon: '🎨' },
-  ],
+  { id: 'java',    name: 'Java',       icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg' },
+  { id: 'js',      name: 'JavaScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
+  { id: 'dotnet',  name: '.NET',       icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg' },
+  { id: 'csharp',  name: 'C#',         icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg' },
+  { id: 'cpp',     name: 'C++',        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg' },
+  { id: 'html',    name: 'HTML',       icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg' },
+  { id: 'css',     name: 'CSS',        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg' },
+],
+
   frameworks: [
-    { id: 'springboot', name: 'Spring Boot',     icon: '🍃' },
-    { id: 'vuejs',      name: 'Vue.js',           icon: '💚' },
-    { id: 'quasar',     name: 'Quasar',           icon: '⚡' },
-    { id: 'react',      name: 'React',            icon: '⚛️' },
-    { id: 'ai',         name: 'AI Integrations',  icon: '🤖' },
+    { id: 'springboot', name: 'Spring Boot',    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg' },
+    { id: 'vuejs',      name: 'Vue.js',         icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg' },
+    { id: 'quasar',     name: 'Quasar',         icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/quasar/quasar-original.svg' },
+    { id: 'react',      name: 'React',          icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
+    { id: 'ai',         name: 'AI Integrations',icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg' }, // closest visual
   ],
+
   tools: [
-    { id: 'docker',      name: 'Docker',      icon: '🐳' },
-    { id: 'kubernetes',  name: 'Kubernetes',  icon: '☸️' },
-    { id: 'aws',         name: 'AWS',         icon: '☁️' },
-    { id: 'keycloak',    name: 'Keycloak',    icon: '🔐' },
-    { id: 'gitlab',      name: 'GitLab',      icon: '🦊' },
-    { id: 'postman',     name: 'Postman',     icon: '📮' },
-    { id: 'intellij',    name: 'IntelliJ',    icon: '🪟' },
-    { id: 'jira',        name: 'Jira',        icon: '📋' },
-    { id: 'sourcetree',  name: 'Sourcetree',  icon: '🗂' },
-    { id: 'slack',       name: 'Slack',       icon: '💬' },
-    { id: 'mattermost',  name: 'Mattermost',  icon: '💙' },
-    { id: 'freescout',   name: 'Freescout',   icon: '📧' },
-    { id: 'git',         name: 'Git',         icon: '🌿' },
-    { id: 'vscode',      name: 'VS Code',     icon: '🔵' },
+    { 
+  id: 'keycloak', 
+  name: 'Keycloak', 
+  icon: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/keycloak.svg' 
+},
+    { id: 'docker',     name: 'Docker',      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg' },
+    { id: 'kubernetes', name: 'Kubernetes',  icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg' },
+    { id: 'aws',        name: 'AWS',         icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg' },
+    { id: 'gitlab',     name: 'GitLab',      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gitlab/gitlab-original.svg' },
+    { id: 'postman',    name: 'Postman',     icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg' },
+    { id: 'intellij',   name: 'IntelliJ',    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg' },
+    { id: 'jira',       name: 'Jira',        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg' },
+    { id: 'sourcetree', name: 'Sourcetree',  icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sourcetree/sourcetree-original.svg' },
+    { id: 'slack',      name: 'Slack',       icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/slack/slack-original.svg' },
+    { id: 'mattermost', name: 'Mattermost',  icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mattermost/mattermost-original.svg' },
+    { id: 'git',        name: 'Git',         icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg' },
+    { id: 'vscode',     name: 'VS Code',     icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg' },
   ],
 };
 
@@ -99,9 +107,8 @@ export const projects = [
     type        : 'Professional',
     period      : 'Oct 2023 – May 2025',
     role        : 'Full Stack Developer',
-    logo        : null,                      // e.g. '/images/orderlab.png'
-    logoEmoji   : '🏭',
-    accentColor : '#4e9cf5',
+    logo        : '/images/OLAB_LOGO.png',                      // e.g. '/images/orderlab.png'
+    accentColor : '#ddddddff',
     description : `Co-developed a B2B platform to optimize and automate the supply chain
 and procurement process as part of a 5-person team, using Spring Boot,
 Vue.js, Keycloak and collaborative agile development practices.
@@ -115,8 +122,7 @@ Delivered full-stack features and managed production deployments.`,
     type        : 'Professional',
     period      : 'Oct 2025 – Present',
     role        : 'Full Stack Developer',
-    logo        : null,                      // e.g. '/images/munasib.png'
-    logoEmoji   : '🛍',
+    logo        : 'images/munasib-logo.png',                      // e.g. '/images/munasib.png'
     accentColor : '#b8bb26',
     description : `Developing an AI-driven e-commerce platform focused on intelligent
 pricing interactions such as negotiation and enhanced buyer–seller

@@ -30,7 +30,6 @@ const emptyLine = <div style={ codeLine }> </div>;
 
 const buildLines = () => {
   const lines = [
-    <L key="c0"><Cmt>{'<!-- Projects.xml — Muttahir Islam -->'}</Cmt></L>,
     <L key="c1"><Tag>{'<projects '}</Tag><Attr>{'xmlns'}</Attr><Pun>{'='}</Pun><Val>{'"muttahir.portfolio"'}</Val><Tag>{'>'}</Tag></L>,
     emptyLine,
   ];

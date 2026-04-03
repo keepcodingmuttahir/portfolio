@@ -32,29 +32,31 @@ const CODE_LINES = [
   <div key="5" style={ codeLine }> </div>,
   <L key="6" i="    "><Ann>{'@Value'}</Ann><Pun>{'('}</Pun><Str>{'"role"'}</Str><Pun>{')'}</Pun></L>,
   <L key="7" i="    "><Kw>{'private '}</Kw><Cls>{'String '}</Cls>{'role '}<Pun>{'= '}</Pun><Str>{'"Software Engineer"'}</Str><Pun>{';'}</Pun></L>,
-  <div key="8" style={ codeLine }> </div>,
-  <L key="9" i="    "><Ann>{'@Value'}</Ann><Pun>{'('}</Pun><Str>{'"specialization"'}</Str><Pun>{')'}</Pun></L>,
-  <L key="10" i="    "><Kw>{'private '}</Kw><Cls>{'List'}</Cls><Pun>{'<'}</Pun><Cls>{'String'}</Cls><Pun>{'> '}</Pun>{'stack '}<Pun>{'= '}</Pun><Cls>{'List'}</Cls><Pun>{'.'}</Pun><Fn>{'of'}</Fn><Pun>{'('}</Pun></L>,
-  <L key="11" i="        "><Str>{'"Spring Boot"'}</Str><Pun>{', '}</Pun><Str>{'"Java"'}</Str><Pun>{', '}</Pun><Str>{'"Vue.js"'}</Str><Pun>{','}</Pun></L>,
-  <L key="12" i="        "><Str>{'"Quasar"'}</Str><Pun>{', '}</Pun><Str>{'"React"'}</Str><Pun>{', '}</Pun><Str>{'"AI Integrations"'}</Str></L>,
-  <L key="13" i="    "><Pun>{');'}</Pun></L>,
-  <div key="14" style={ codeLine }> </div>,
-  <L key="15" i="    "><Ann>{'@Bean'}</Ann></L>,
-  <L key="16" i="    "><Kw>{'public '}</Kw><Cls>{'String '}</Cls><Fn>{'bio'}</Fn><Pun>{'() {'}</Pun></L>,
-  <L key="17" i="        "><Kw>{'return '}</Kw><Str>{'"Building enterprise-grade cloud-friendly"'}</Str></L>,
-  <L key="18" i="               "><Pun>{'+ '}</Pun><Str>{'"software with 20+ production-ready features"'}</Str></L>,
-  <L key="19" i="               "><Pun>{'+ '}</Pun><Str>{'"in compliance with security & privacy standards."'}</Str><Pun>{';'}</Pun></L>,
-  <L key="20" i="    "><Pun>{'}'}</Pun></L>,
-  <div key="21" style={ codeLine }> </div>,
-  <L key="22" i="    "><Kw>{'public static void '}</Kw><Fn>{'main'}</Fn><Pun>{'('}</Pun><Cls>{'String'}</Cls><Pun>{'[] '}</Pun>{'args'}<Pun>{') {'}</Pun></L>,
-  <L key="23" i="        "><Cls>{'SpringApplication'}</Cls><Pun>{'.'}</Pun><Fn>{'run'}</Fn><Pun>{'('}</Pun><Cls>{'MuttahirIslam'}</Cls><Pun>{'.'}</Pun><Kw>{'class'}</Kw><Pun>{', '}</Pun>{'args'}<Pun>{');'}</Pun></L>,
-  <L key="24" i="    "><Pun>{'}'}</Pun></L>,
-  <L key="25"><Pun>{'}'}</Pun></L>,
-  <div key="26" style={ codeLine }> </div>,
-  <L key="27"><Cmt>{'// 🚀  Server started on port 8080'}</Cmt></L>,
-  <L key="28"><Cmt>{'// ✅  All beans initialized successfully'}</Cmt></L>,
-  <L key="29"><Cmt>{'// 💼  Ready to accept new opportunities'}</Cmt></L>,
-  <div key="30" style={ codeLine }><span className="cursor-blink" /></div>,
+<div key="8" style={ codeLine }> </div>,
+<L key="9" i="    "><Ann>{'@Value'}</Ann><Pun>{'('}</Pun><Str>{'"specialization"'}</Str><Pun>{')'}</Pun></L>,
+<L key="10" i="    "><Kw>{'private '}</Kw><Cls>{'List'}</Cls><Pun>{'<'}</Pun><Cls>{'String'}</Cls><Pun>{'> '}</Pun>{'stack '}<Pun>{'= '}</Pun><Cls>{'List'}</Cls><Pun>{'.'}</Pun><Fn>{'of'}</Fn><Pun>{'('}</Pun></L>,
+<L key="11" i="        "><Str>{'"Spring Boot"'}</Str><Pun>{', '}</Pun><Str>{'"Java"'}</Str><Pun>{', '}</Pun><Str>{'"Spring Framework"'}</Str><Pun>{', '}</Pun><Str>{'"Hibernate"'}</Str><Pun>{','}</Pun></L>,
+<L key="12" i="        "><Str>{'"JPA"'}</Str><Pun>{', '}</Pun><Str>{'"REST APIs"'}</Str><Pun>{', '}</Pun><Str>{'"Microservices"'}</Str><Pun>{', '}</Pun><Str>{'"MVC Architecture"'}</Str><Pun>{','}</Pun></L>,
+<L key="13" i="        "><Str>{'"MySQL"'}</Str><Pun>{', '}</Pun><Str>{'"PostgreSQL"'}</Str><Pun>{', '}</Pun><Str>{'"MongoDB"'}</Str><Pun>{', '}</Pun><Str>{'"H2"'}</Str><Pun>{','}</Pun></L>,
+<L key="14" i="        "><Str>{'"JavaScript"'}</Str><Pun>{', '}</Pun><Str>{'"Vue.js"'}</Str><Pun>{', '}</Pun><Str>{'"Quasar"'}</Str><Pun>{', '}</Pun><Str>{'"React"'}</Str><Pun>{','}</Pun></L>,
+<L key="15" i="        "><Str>{'"HTML"'}</Str><Pun>{', '}</Pun><Str>{'"CSS"'}</Str><Pun>{', '}</Pun><Str>{'"Git"'}</Str><Pun>{', '}</Pun><Str>{'"GitHub"'}</Str><Pun>{','}</Pun></L>,
+<L key="16" i="        "><Str>{'"Docker"'}</Str><Pun>{', '}</Pun><Str>{'"Maven"'}</Str><Pun>{', '}</Pun><Str>{'"Gradle"'}</Str><Pun>{', '}</Pun><Str>{'"Postman"'}</Str><Pun>{','}</Pun></L>,
+<L key="17" i="        "><Str>{'"JUnit"'}</Str><Pun>{', '}</Pun><Str>{'"Mockito"'}</Str><Pun>{', '}</Pun><Str>{'"CI/CD"'}</Str><Pun>{', '}</Pun><Str>{'"Vercel"'}</Str><Pun>{','}</Pun></L>,
+<L key="18" i="        "><Str>{'"AI Integrations"'}</Str><Pun>{', '}</Pun><Str>{'"LLM APIs"'}</Str><Pun>{', '}</Pun><Str>{'"Claude Code"'}</Str><Pun>{', '}</Pun><Str>{'"Prompt Engineering"'}</Str></L>,
+<L key="19" i="    "><Pun>{');'}</Pun></L>,
+  <div key="20" style={ codeLine }> </div>,
+<L key="21" i="    "><Ann>{'@Bean'}</Ann></L>,
+<L key="22" i="    "><Kw>{'public '}</Kw><Cls>{'String '}</Cls><Fn>{'bio'}</Fn><Pun>{'() {'}</Pun></L>,
+<L key="23" i="        "><Kw>{'return '}</Kw><Str>{'"Building scalable, secure, and cloud-native applications "'}</Str></L>,
+<L key="24" i="               "><Pun>{'+ '}</Pun><Str>{'"using microservices architecture, RESTful APIs, and distributed systems "'}</Str></L>,
+<L key="25" i="               "><Pun>{'+ '}</Pun><Str>{'"optimized for performance, reliability, and continuous delivery."'}</Str><Pun>{';'}</Pun></L>,
+<L key="26" i="    "><Pun>{'}'}</Pun></L>,
+  <div key="27" style={ codeLine }> </div>,
+  <L key="28" i="    "><Kw>{'public static void '}</Kw><Fn>{'main'}</Fn><Pun>{'('}</Pun><Cls>{'String'}</Cls><Pun>{'[] '}</Pun>{'args'}<Pun>{') {'}</Pun></L>,
+  <L key="29" i="        "><Cls>{'SpringApplication'}</Cls><Pun>{'.'}</Pun><Fn>{'run'}</Fn><Pun>{'('}</Pun><Cls>{'MuttahirIslam'}</Cls><Pun>{'.'}</Pun><Kw>{'class'}</Kw><Pun>{', '}</Pun>{'args'}<Pun>{');'}</Pun></L>,
+  <L key="30" i="    "><Pun>{'}'}</Pun></L>,
+  <L key="31"><Pun>{'}'}</Pun></L>,
+  <div key="32" style={ codeLine }><span className="cursor-blink" /></div>,
 ];
 
 const st = {
@@ -198,12 +200,11 @@ export default function Home({ onTabChange, onContactOpen }) {
           <span style={ st.nameAccent }>{ personalInfo.lastName }</span>
         </div>
 
-        <div style={ st.role }>☕ { personalInfo.role }</div>
-
+        <div style={ st.role }> { personalInfo.role }</div>
         <div style={ st.bio }>
-          Specializing in Java, Spring Boot, Vue.js, Quasar, React &amp; AI integrations.
-          Building enterprise-level cloud-friendly software with 20+ production-ready features.
-        </div>
+  Specializing in cloud-native application development using Java, Spring Boot, modern frontend frameworks, and microservices architecture.
+  Building scalable, secure, and high-performance systems with distributed design, RESTful APIs, and production-ready engineering practices.
+</div>
 
         <div style={ st.btnRow }>
           <button
