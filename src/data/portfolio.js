@@ -9,7 +9,7 @@ export const personalInfo = {
   firstName : 'Muttahir',
   lastName  : 'Islam',
   role      : 'Software Engineer',
-  phone     : '+1 (216) 408 3651',
+  phone     : '+1 (440) 384 8299',
   email     : 'hire@muttahirislam.dev',
   github    : 'https://github.com/keepcodingmuttahir',
   linkedin  : 'https://linkedin.com/in/muttahirislam',
@@ -109,10 +109,7 @@ export const projects = [
     role        : 'Full Stack Developer',
     logo        : '/images/OLAB_LOGO.png',                      // e.g. '/images/orderlab.png'
     accentColor : '#ddddddff',
-    description : `Co-developed a B2B platform to optimize and automate the supply chain
-and procurement process as part of a 5-person team, using Spring Boot,
-Vue.js, Keycloak and collaborative agile development practices.
-Delivered full-stack features and managed production deployments.`,
+    description : `Co-developed a B2B platform to optimize and automate the supply chain and procurement process as part of a 5-person team, using Spring Boot, Vue.js, Keycloak and collaborative agile development practices. Delivered full-stack features and managed production deployments.`,
     tags        : ['Spring Boot', 'Vue.js', 'Keycloak', 'Microservices', 'Docker', 'Kafka'],
     link        : null,
   },
@@ -124,10 +121,7 @@ Delivered full-stack features and managed production deployments.`,
     role        : 'Full Stack Developer',
     logo        : 'images/munasib-logo.png',                      // e.g. '/images/munasib.png'
     accentColor : '#b8bb26',
-    description : `Developing an AI-driven e-commerce platform focused on intelligent
-pricing interactions such as negotiation and enhanced buyer–seller
-engagement, enabling faster, smarter, and more dynamic online
-transactions at scale.`,
+    description : `Developing an AI-driven e-commerce platform focused on intelligent pricing interactions such as negotiation and enhanced buyer–seller engagement, enabling faster, smarter, and more dynamic online transactions at scale.`,
     tags        : ['Spring Boot', 'Vue.js', 'AI Integration', 'Microservices', 'Keycloak'],
     link        : null,
   },
@@ -140,9 +134,7 @@ transactions at scale.`,
     logo        : null,                      // e.g. '/images/asaan-rasta.png'
     logoEmoji   : '🗺',
     accentColor : '#8ec07c',
-    description : `Route finder app providing the best local transport routes to help
-school-going, university-going, and office-going people who cannot
-afford expensive ride-hailing services.`,
+    description : `Route finder app providing the best local transport routes to help school-going, university-going, and office-going people who cannot afford expensive ride-hailing services.`,
     tags        : ['.NET', 'React', 'Maps API', 'Route Optimization'],
     link        : null,
   },
