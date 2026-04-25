@@ -30,7 +30,7 @@ const CODE_LINES = [
   <div key="9" style={ codeLine }> </div>,
   <L key="10"><Tag>{'status'}</Tag><Pun>{':'}</Pun></L>,
   <L key="11" i="  "><Key>{'available'}</Key><Pun>{' : '}</Pun><Bool>{ String(personalInfo.available) }</Bool></L>,
-  <L key="12" i="  "><Key>{'openTo'}</Key><Pun>{'    : '}</Pun><Val>{'Full-time, Part-time, Remote'}</Val></L>,
+  <L key="12" i="  "><Key>{'openTo'}</Key><Pun>{'    : '}</Pun><Val>{'Full-time, Part-time, Remote.'}</Val></L>,
   <div key="13" style={ codeLine }> </div>
 ];
 
