@@ -17,6 +17,7 @@ import Experience from './pages/Experience.jsx';
 import Contact    from './pages/Contact.jsx';
 
 import { useIsMobile } from './hooks/useIsMobile.js';
+import { useSwipe    } from './hooks/useSwipe.js';
 
 const TABS = ['home', 'about', 'projects', 'experience', 'contact'];
 
@@ -96,6 +97,18 @@ export default function App() {
     return () => window.removeEventListener('keydown', handleKey);
   }, [activeTab]);
 
+  const swipeHandlers = useSwipe({
+    disabled     : !isMobile,
+    onSwipeLeft  : () => {
+      const idx = TABS.indexOf(activeTab);
+      if (idx < TABS.length - 1) setActiveTab(TABS[idx + 1]);
+    },
+    onSwipeRight : () => {
+      const idx = TABS.indexOf(activeTab);
+      if (idx > 0) setActiveTab(TABS[idx - 1]);
+    },
+  });
+
   return (
     <div style={ styles.root } className="app-vignette">
 
@@ -128,7 +141,7 @@ export default function App() {
           <TabBar     activeTab={ activeTab } onTabChange={ setActiveTab } />
           <Breadcrumb activeTab={ activeTab } />
 
-          <div style={ styles.pageArea }>
+          <div style={ styles.pageArea } { ...swipeHandlers }>
             <PageTransition activeTab={ activeTab }>
               <ActivePage
                 onTabChange={ setActiveTab }
