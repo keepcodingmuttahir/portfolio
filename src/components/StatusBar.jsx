@@ -1,4 +1,5 @@
 import React from 'react';
+import { useIsMobile } from '../hooks/useIsMobile.js';
 
 const styles = {
   statusBar: {
@@ -11,6 +12,7 @@ const styles = {
     gap         : '14px',
     flexShrink  : '0',
     userSelect  : 'none',
+    overflow    : 'hidden',
   },
   item: {
     display    : 'flex',
@@ -20,6 +22,7 @@ const styles = {
     color      : '#555555',
     fontFamily : 'Inter, sans-serif',
     cursor     : 'default',
+    whiteSpace : 'nowrap',
   },
   branch: {
     color : '#fe8019',
@@ -35,6 +38,8 @@ const styles = {
 };
 
 export default function StatusBar({ activeTab }) {
+  const isMobile = useIsMobile();
+
   const fileMap = {
     home       : '1:1',
     about      : '1:1',
@@ -50,22 +55,26 @@ export default function StatusBar({ activeTab }) {
         <span style={ styles.branch }>main</span>
       </div>
 
-      <div style={ styles.item }>
-        <span>☕</span>
-        <span>Java 21</span>
-      </div>
+      { !isMobile && (
+        <div style={ styles.item }>
+          <span>☕</span>
+          <span>Java 21</span>
+        </div>
+      ) }
 
       <div style={ { ...styles.item, ...styles.ok } }>
         <span>✓</span>
-        <span>0 errors, 0 warnings</span>
+        <span>{ isMobile ? '0 errors' : '0 errors, 0 warnings' }</span>
       </div>
 
-      <div style={ styles.rightGroup }>
-        <div style={ styles.item }>{ fileMap[activeTab] || '1:1' }</div>
-        <div style={ styles.item }>UTF-8</div>
-        <div style={ styles.item }>LF</div>
-        <div style={ styles.item }>IntelliJ IDEA</div>
-      </div>
+      { !isMobile && (
+        <div style={ styles.rightGroup }>
+          <div style={ styles.item }>{ fileMap[activeTab] || '1:1' }</div>
+          <div style={ styles.item }>UTF-8</div>
+          <div style={ styles.item }>LF</div>
+          <div style={ styles.item }>IntelliJ IDEA</div>
+        </div>
+      ) }
     </div>
   );
 }

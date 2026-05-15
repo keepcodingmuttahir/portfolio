@@ -2,6 +2,7 @@ import React from 'react';
 import LineNumbers from '../components/LineNumbers.jsx';
 import SkillCard from '../components/SkillCard.jsx';
 import { education, certifications, skills } from '../data/portfolio.js';
+import { useIsMobile } from '../hooks/useIsMobile.js';
 
 // ── Syntax token components ────────────────────────────────────
 const Kw  = ({ children }) => <span className="syn-keyword">{ children }</span>;
@@ -49,7 +50,7 @@ const CODE_LINES = [
   <L key="23" i="            "><Pun>{'.'}</Pun><Fn>{'build'}</Fn><Pun>{'();'}</Pun></L>,
   <L key="24" i="    "><Pun>{'}'}</Pun></L>,
   <L key="25"><Pun>{'}'}</Pun></L>,
-    <div key="30" style={ codeLine }><span className="cursor-blink" /></div>,
+  <div key="30" style={ codeLine }><span className="cursor-blink" /></div>,
 ];
 
 const st = {
@@ -106,14 +107,35 @@ const st = {
 };
 
 export default function About() {
-  return (
-    <div style={ st.wrapper } className="fade-in">
-      <div style={ st.codePanel }>
-        <LineNumbers count={ CODE_LINES.length + 5 } />
-        <div style={ st.codeArea }>{ CODE_LINES }</div>
-      </div>
+  const isMobile = useIsMobile();
 
-      <div style={ st.rightPanel }>
+  const wrapperStyle = {
+    ...st.wrapper,
+    flexDirection : isMobile ? 'column' : 'row',
+  };
+
+  const rightPanelStyle = {
+    ...st.rightPanel,
+    width      : isMobile ? '100%' : '340px',
+    flexShrink : isMobile ? '1' : '0',
+    flex       : isMobile ? '1' : 'none',
+    borderLeft : isMobile ? 'none' : '1px solid #1e1e1e',
+    padding    : isMobile ? '16px' : '20px',
+  };
+
+  return (
+    <div style={ wrapperStyle } className="fade-in">
+
+      { /* Code panel — hidden on mobile */ }
+      { !isMobile && (
+        <div style={ st.codePanel }>
+          <LineNumbers count={ CODE_LINES.length + 5 } />
+          <div style={ st.codeArea }>{ CODE_LINES }</div>
+        </div>
+      ) }
+
+      { /* Content panel */ }
+      <div style={ rightPanelStyle }>
         <div style={ st.sectionLabel }>Education</div>
         <div style={ st.educBox }>
           <div style={ st.educDegree }>{ education.degree }</div>

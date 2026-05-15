@@ -1,4 +1,5 @@
 import React from 'react';
+import { useIsMobile } from '../hooks/useIsMobile.js';
 
 const styles = {
   titleBar: {
@@ -19,6 +20,7 @@ const styles = {
     alignItems : 'center',
     gap        : '10px',
     flex       : '1',
+    minWidth   : '0',
   },
   logo: {
     width           : '20px',
@@ -37,6 +39,7 @@ const styles = {
   menuBar: {
     display    : 'flex',
     gap        : '2px',
+    overflow   : 'hidden',
   },
   menuItem: {
     fontSize        : '11px',
@@ -110,16 +113,20 @@ const styles = {
 const menuItems = ['File', 'Edit', 'View', 'Navigate', 'Code', 'Refactor', 'Run', 'Tools', 'Help'];
 
 export default function TitleBar() {
+  const isMobile = useIsMobile();
+
   return (
     <div style={ styles.titleBar }>
       { /* Left — logo + menu */ }
       <div style={ styles.left }>
         <div style={ styles.logo }>IJ</div>
-        <div style={ styles.menuBar }>
-          { menuItems.map(item => (
-            <span key={ item } style={ styles.menuItem }>{ item }</span>
-          )) }
-        </div>
+        { !isMobile && (
+          <div style={ styles.menuBar }>
+            { menuItems.map(item => (
+              <span key={ item } style={ styles.menuItem }>{ item }</span>
+            )) }
+          </div>
+        ) }
       </div>
 
       { /* Center — project name + branch */ }
@@ -130,15 +137,19 @@ export default function TitleBar() {
 
       { /* Right — action icons + window controls */ }
       <div style={ styles.right }>
-        <button style={ styles.iconBtn } title="Search">🔍</button>
-        <button style={ { ...styles.iconBtn, color: '#b8bb26' } } title="Run">▶</button>
-        <button style={ { ...styles.iconBtn, color: '#83a598' } } title="Debug">🐛</button>
-        <button style={ styles.iconBtn } title="Settings">⚙</button>
+        { !isMobile && (
+          <>
+            <button style={ styles.iconBtn } title="Search">🔍</button>
+            <button style={ { ...styles.iconBtn, color: '#b8bb26' } } title="Run">▶</button>
+            <button style={ { ...styles.iconBtn, color: '#83a598' } } title="Debug">🐛</button>
+            <button style={ styles.iconBtn } title="Settings">⚙</button>
+          </>
+        ) }
 
         <div style={ styles.winControls }>
-          <button style={ { ...styles.winBtn, background: '#ff5f57' } } title="Close"   />
-          <button style={ { ...styles.winBtn, background: '#febc2e' } } title="Minimize" />
-          <button style={ { ...styles.winBtn, background: '#28c840' } } title="Maximize" />
+          <button style={ { ...styles.winBtn, background: '#ff5f57' } } title="Close"    />
+          <button style={ { ...styles.winBtn, background: '#febc2e' } } title="Minimize"  />
+          <button style={ { ...styles.winBtn, background: '#28c840' } } title="Maximize"  />
         </div>
       </div>
     </div>

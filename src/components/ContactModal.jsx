@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { personalInfo } from '../data/portfolio.js';
+import { useIsMobile } from '../hooks/useIsMobile.js';
 
 // ── EmailJS credentials ────────────────────────────────────────
 const EMAILJS_SERVICE_ID  = 'service_wyspx8t';
@@ -61,10 +62,14 @@ const s = {
     alignItems     : 'center',
     gap            : '8px',
     background     : '#080808',
+    overflow       : 'hidden',
   },
   toVal: {
     color      : '#fe8019',
     fontFamily : "'JetBrains Mono', monospace",
+    overflow   : 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace : 'nowrap',
   },
   closeBtn: {
     width          : '28px',
@@ -78,9 +83,13 @@ const s = {
     display        : 'flex',
     alignItems     : 'center',
     justifyContent : 'center',
+    flexShrink     : '0',
   },
   body: {
     padding : '20px 24px 24px',
+  },
+  bodyMobile: {
+    padding : '16px',
   },
   fieldWrap: {
     marginBottom : '13px',
@@ -104,9 +113,8 @@ const s = {
     fontSize     : '12px',
     fontFamily   : "'JetBrains Mono', monospace",
     outline      : 'none',
-    boxSizing    : 'box-sizing',
     transition   : 'border-color 0.15s ease',
-    width        : '100%',
+    boxSizing    : 'border-box',
   }),
   textarea: (focused) => ({
     width        : '100%',
@@ -122,7 +130,6 @@ const s = {
     resize       : 'vertical',
     minHeight    : '120px',
     lineHeight   : '1.65',
-    width        : '100%',
     boxSizing    : 'border-box',
   }),
   row: {
@@ -278,6 +285,7 @@ export default function ContactModal({ open, onClose }) {
   const [sending, setSending] = useState(false);
   const [sent,    setSent]    = useState(false);
   const [error,   setError]   = useState('');
+  const isMobile              = useIsMobile();
 
   useEffect(() => {
     if (open) loadEmailJS().catch(() => {});
@@ -342,12 +350,29 @@ export default function ContactModal({ open, onClose }) {
     }
   };
 
+  const overlayStyle = {
+    ...s.overlay,
+    alignItems: isMobile ? 'flex-end' : 'center',
+    padding   : isMobile ? '0' : '20px',
+  };
+
+  const modalStyle = {
+    ...s.modal,
+    borderRadius  : isMobile ? '10px 10px 0 0' : '10px',
+    maxHeight     : isMobile ? '90vh' : 'none',
+    overflowY     : isMobile ? 'auto' : 'hidden',
+    display       : 'flex',
+    flexDirection : 'column',
+  };
+
+  const bodyPadding = isMobile ? s.bodyMobile : s.body;
+
   return (
     <div
-      style={ s.overlay }
+      style={ overlayStyle }
       onClick={ (e) => e.target === e.currentTarget && onClose() }
     >
-      <div style={ s.modal }>
+      <div style={ modalStyle }>
 
         { /* ── Tab-style header ── */ }
         <div style={ s.header }>
@@ -376,9 +401,10 @@ export default function ContactModal({ open, onClose }) {
             <button style={ s.successClose } onClick={ onClose }>Close</button>
           </div>
         ) : (
-          <form style={ s.body } onSubmit={ handleSend }>
+          <form style={ bodyPadding } onSubmit={ handleSend }>
 
-            <div style={ s.row }>
+            { /* Name + Email row: side-by-side on desktop, stacked on mobile */ }
+            <div style={ { ...s.row, flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? '0' : '12px' } }>
               <div style={ s.half }>
                 <Field label="Your Name *">
                   <Input
@@ -418,11 +444,19 @@ export default function ContactModal({ open, onClose }) {
 
             { error && <div style={ s.error }>⚠ { error }</div> }
 
-            <div style={ s.footer }>
-              <button type="button" style={ s.cancelBtn } onClick={ onClose }>
+            <div style={ { ...s.footer, flexDirection: isMobile ? 'column-reverse' : 'row', gap: isMobile ? '8px' : '10px' } }>
+              <button
+                type="button"
+                style={ { ...s.cancelBtn, width: isMobile ? '100%' : 'auto' } }
+                onClick={ onClose }
+              >
                 Cancel
               </button>
-              <button type="submit" style={ s.sendBtn(sending) } disabled={ sending }>
+              <button
+                type="submit"
+                style={ { ...s.sendBtn(sending), width: isMobile ? '100%' : 'auto', minWidth: isMobile ? 'unset' : '140px' } }
+                disabled={ sending }
+              >
                 { sending ? '⏳ Sending...' : '✉ Send Message' }
               </button>
             </div>

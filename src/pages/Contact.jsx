@@ -1,5 +1,6 @@
 import React from 'react';
 import { personalInfo } from '../data/portfolio.js';
+import { useIsMobile } from '../hooks/useIsMobile.js';
 
 const Key  = ({ children }) => <span className="syn-property">{ children }</span>;
 const Val  = ({ children }) => <span className="syn-string">{ children }</span>;
@@ -89,8 +90,9 @@ const st = {
     fontFamily : 'Inter, sans-serif',
   },
   codeInner: {
-    display : 'flex',
-    padding : '16px 0',
+    display  : 'flex',
+    padding  : '16px 0',
+    overflowX: 'auto',
   },
   lineNums: {
     width       : '44px',
@@ -111,12 +113,14 @@ const st = {
   codeLines: {
     flex    : '1',
     padding : '0 0 0 16px',
+    minWidth: '0',
   },
   linkRow: {
     display        : 'flex',
     gap            : '12px',
     flexWrap       : 'wrap',
     justifyContent : 'center',
+    width          : '100%',
   },
   linkBtn: (color) => ({
     display        : 'inline-flex',
@@ -133,13 +137,33 @@ const st = {
     textDecoration : 'none',
     transition     : 'all 0.2s ease',
     cursor         : 'pointer',
+    flex           : '1',
+    minWidth       : '120px',
+    justifyContent : 'center',
+    textAlign      : 'center',
+    overflow       : 'hidden',
+    textOverflow   : 'ellipsis',
+    whiteSpace     : 'nowrap',
   }),
 };
 
 export default function Contact({ onContactOpen }) {
+  const isMobile = useIsMobile();
+
+  const wrapperStyle = {
+    ...st.wrapper,
+    alignItems : isMobile ? 'flex-start' : 'center',
+  };
+
+  const innerStyle = {
+    ...st.inner,
+    padding : isMobile ? '20px 16px' : '40px',
+    gap     : isMobile ? '20px' : '28px',
+  };
+
   return (
-    <div style={ st.wrapper } className="fade-in">
-      <div style={ st.inner }>
+    <div style={ wrapperStyle } className="fade-in">
+      <div style={ innerStyle }>
         <div style={ st.heading }>contact.yaml</div>
 
         <div style={ st.sub }>
@@ -166,7 +190,7 @@ export default function Contact({ onContactOpen }) {
 
         <div style={ st.linkRow }>
           <button onClick={ onContactOpen } style={ st.linkBtn('#fe8019') }>
-            ✉ { personalInfo.email }
+            ✉ { isMobile ? 'Email Me' : personalInfo.email }
           </button>
           <a href={ personalInfo.github } target="_blank" rel="noopener noreferrer" style={ st.linkBtn('#6aab73') }>
             🐙 GitHub

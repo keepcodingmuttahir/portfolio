@@ -16,6 +16,8 @@ import Projects   from './pages/Projects.jsx';
 import Experience from './pages/Experience.jsx';
 import Contact    from './pages/Contact.jsx';
 
+import { useIsMobile } from './hooks/useIsMobile.js';
+
 const TABS = ['home', 'about', 'projects', 'experience', 'contact'];
 
 const PAGES = {
@@ -81,6 +83,7 @@ function ActivePage({ activeTab, onTabChange, onContactOpen }) {
 export default function App() {
   const [activeTab,   setActiveTab]   = useState('home');
   const [contactOpen, setContactOpen] = useState(false);
+  const isMobile                      = useIsMobile();
 
   useEffect(() => {
     const handleKey = (e) => {
@@ -106,15 +109,19 @@ export default function App() {
 
       <div style={ styles.body }>
 
-        { /* Icon rail */ }
-        <div style={ { position: 'relative', zIndex: '1', background: 'rgba(0,0,0,0.85)', borderRight: '1px solid #1e1e1e', flexShrink: 0 } }>
-          <IconRail />
-        </div>
+        { /* Icon rail — hidden on mobile */ }
+        { !isMobile && (
+          <div style={ { position: 'relative', zIndex: '1', background: 'rgba(0,0,0,0.85)', borderRight: '1px solid #1e1e1e', flexShrink: 0 } }>
+            <IconRail />
+          </div>
+        ) }
 
-        { /* File tree sidebar */ }
-        <div style={ styles.sidebarWrap }>
-          <Sidebar activeTab={ activeTab } onTabChange={ setActiveTab } />
-        </div>
+        { /* File tree sidebar — hidden on mobile */ }
+        { !isMobile && (
+          <div style={ styles.sidebarWrap }>
+            <Sidebar activeTab={ activeTab } onTabChange={ setActiveTab } />
+          </div>
+        ) }
 
         { /* Editor */ }
         <div style={ styles.editorArea }>

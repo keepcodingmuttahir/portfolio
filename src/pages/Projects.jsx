@@ -2,6 +2,7 @@ import React from 'react';
 import LineNumbers from '../components/LineNumbers.jsx';
 import ProjectCard from '../components/ProjectCard.jsx';
 import { projects } from '../data/portfolio.js';
+import { useIsMobile } from '../hooks/useIsMobile.js';
 
 // ── Syntax token components ────────────────────────────────────
 const Tag  = ({ children }) => <span className="syn-tag">{ children }</span>;
@@ -96,18 +97,38 @@ const st = {
 };
 
 export default function Projects() {
-  const lines = buildLines();
+  const lines    = buildLines();
+  const isMobile = useIsMobile();
+
+  const wrapperStyle = {
+    ...st.wrapper,
+    flexDirection : isMobile ? 'column' : 'row',
+  };
+
+  const rightPanelStyle = {
+    ...st.rightPanel,
+    width      : isMobile ? '100%' : '380px',
+    flexShrink : isMobile ? '1' : '0',
+    flex       : isMobile ? '1' : 'none',
+    borderLeft : isMobile ? 'none' : '1px solid #1e1e1e',
+    padding    : isMobile ? '16px' : '20px',
+  };
 
   return (
-    <div style={ st.wrapper } className="fade-in">
-      <div style={ st.codePanel }>
-        <LineNumbers count={ lines.length + 5 } />
-        <div style={ st.codeArea }>
-          { lines }
-        </div>
-      </div>
+    <div style={ wrapperStyle } className="fade-in">
 
-      <div style={ st.rightPanel }>
+      { /* Code panel — hidden on mobile */ }
+      { !isMobile && (
+        <div style={ st.codePanel }>
+          <LineNumbers count={ lines.length + 5 } />
+          <div style={ st.codeArea }>
+            { lines }
+          </div>
+        </div>
+      ) }
+
+      { /* Projects panel */ }
+      <div style={ rightPanelStyle }>
         <div style={ st.sectionLabel }>Projects</div>
         { projects.map(project => (
           <ProjectCard key={ project.id } project={ project } />

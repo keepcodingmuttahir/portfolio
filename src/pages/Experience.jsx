@@ -1,6 +1,7 @@
 import React from 'react';
 import LineNumbers from '../components/LineNumbers.jsx';
 import { experience } from '../data/portfolio.js';
+import { useIsMobile } from '../hooks/useIsMobile.js';
 
 // ── Kotlin token components ────────────────────────────────────
 const Kw  = ({ children }) => <span className="syn-keyword">{ children }</span>;
@@ -139,16 +140,36 @@ const st = {
 };
 
 export default function Experience() {
-  const lines = buildLines();
+  const lines    = buildLines();
+  const isMobile = useIsMobile();
+
+  const wrapperStyle = {
+    ...st.wrapper,
+    flexDirection : isMobile ? 'column' : 'row',
+  };
+
+  const rightPanelStyle = {
+    ...st.rightPanel,
+    width      : isMobile ? '100%' : '380px',
+    flexShrink : isMobile ? '1' : '0',
+    flex       : isMobile ? '1' : 'none',
+    borderLeft : isMobile ? 'none' : '1px solid #1e1e1e',
+    padding    : isMobile ? '16px' : '20px',
+  };
 
   return (
-    <div style={ st.wrapper } className="fade-in">
-      <div style={ st.codePanel }>
-        <LineNumbers count={ lines.length + 5 } />
-        <div style={ st.codeArea }>{ lines }</div>
-      </div>
+    <div style={ wrapperStyle } className="fade-in">
 
-      <div style={ st.rightPanel }>
+      { /* Code panel — hidden on mobile */ }
+      { !isMobile && (
+        <div style={ st.codePanel }>
+          <LineNumbers count={ lines.length + 5 } />
+          <div style={ st.codeArea }>{ lines }</div>
+        </div>
+      ) }
+
+      { /* Experience panel */ }
+      <div style={ rightPanelStyle }>
         <div style={ st.sectionLabel }>Professional Experience</div>
 
         { experience.map(job => (
